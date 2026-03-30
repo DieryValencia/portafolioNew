@@ -92,7 +92,9 @@ export function Contact({ isDark, t, colors }: ContactProps) {
                     rel={c.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                     className="flex items-center gap-4 p-4 rounded-xl transition-all group"
                     style={{
-                      border: `1px solid ${colors.border}`,
+                      borderWidth: '1px',
+                      borderStyle: 'solid',
+                      borderColor: colors.border,
                       background: colors.bg2,
                     }}
                     onMouseEnter={(e) => {

@@ -42,7 +42,9 @@ export function Footer({ isDark, t }: FooterProps) {
               className="w-11 h-11 rounded-xl flex items-center justify-center transition-all hover:scale-110"
               style={{
                 background: 'rgba(255,255,255,0.05)',
-                border: '1px solid rgba(255,255,255,0.08)',
+                borderWidth: '1px',
+                borderStyle: 'solid',
+                borderColor: 'rgba(255,255,255,0.08)',
                 color,
               }}
               onMouseEnter={(e) => {
