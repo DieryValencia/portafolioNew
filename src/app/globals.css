@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+* {
+  font-family: 'Montserrat', sans-serif;
+}
+
+:root {
+  --c-bg: #f8fafc;
+  --c-bg2: #ffffff;
+  --c-blue: #2563eb;
+  --c-accent: #f97316;
+  --c-text: #0f172a;
+  --c-muted: #64748b;
+  --c-border: #e2e8f0;
+}
+
+html.dark {
+  --c-bg: #0f172a;
+  --c-bg2: #1e293b;
+  --c-blue: #60a5fa;
+  --c-accent: #fb923c;
+  --c-text: #f1f5f9;
+  --c-muted: #94a3b8;
+  --c-border: #334155;
+}
+
+@keyframes heroFloat {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+@keyframes floatObj {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(3deg);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.55;
+  }
+}
+
+/* Objetos flotantes — reflejo en dark mode */
+.float-obj-light {
+  display: block;
+}
+
+.float-obj-dark {
+  display: none;
+}
+
+html.dark .float-obj-light {
+  display: none;
+}
+
+html.dark .float-obj-dark {
+  display: block;
+  animation: shimmer 2.5s ease-in-out infinite;
+}
+
+/* Footer link hover */
+.footer-link {
+  color: #64748b;
+  transition: color 0.2s;
+}
+
+.footer-link:hover {
+  color: #f8fafc;
+}
+
+/* Scrollbar personalizado */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background: #475569;
+}
+
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
