@@ -111,7 +111,9 @@ export function Hero({ isDark, t, colors }: HeroProps) {
 
             {/* Botones */}
             <div className="flex gap-3 flex-wrap justify-center lg:justify-start">
-              <button
+              <a
+                href="/cv-diery-valencia/CV_Diery__Valencia.pdf"
+                download
                 className="flex items-center gap-2 px-7 py-3 rounded-xl text-sm font-semibold text-white transition-all hover:opacity-90 hover:scale-105"
                 style={{
                   background: 'linear-gradient(135deg,#2563EB,#1D4ED8)',
@@ -120,7 +122,7 @@ export function Hero({ isDark, t, colors }: HeroProps) {
               >
                 <Download className="w-4 h-4" />
                 {t.hero.downloadCV}
-              </button>
+              </a>
               <Link
                 href="#proyectos"
                 className="px-7 py-3 rounded-xl text-sm font-semibold transition-all hover:scale-105"
