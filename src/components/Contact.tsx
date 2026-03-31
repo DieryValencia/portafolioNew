@@ -5,7 +5,9 @@ import { Mail } from 'lucide-react';
 import { FaWhatsapp, FaGithub } from 'react-icons/fa';
 import { Translation } from '@/types';
 import { CONTACT_INFO } from '@/data/constants';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import emailjs from '@emailjs/browser';
+import { EMAILJS_CONFIG, isEmailJSConfigured } from '@/config/emailjs';
 
 interface ContactProps {
   isDark: boolean;
@@ -20,18 +22,150 @@ interface ContactProps {
   };
 }
 
+interface FormState {
+  fullName: string;
+  email: string;
+  subject: string;
+  message: string;
+}
+
+interface FormStatus {
+  status: 'idle' | 'loading' | 'success' | 'error';
+  message: string;
+}
+
 export function Contact({ isDark, t, colors }: ContactProps) {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormState>({
     fullName: '',
     email: '',
     subject: '',
     message: '',
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [formStatus, setFormStatus] = useState<FormStatus>({
+    status: 'idle',
+    message: '',
+  });
+
+  // Inicializar EmailJS
+  useEffect(() => {
+    if (isEmailJSConfigured()) {
+      emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
+    }
+  }, []);
+
+  // Validar email
+  const isValidEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  // Validar formulario
+  const validateForm = (): boolean => {
+    if (!formData.fullName.trim()) {
+      setFormStatus({
+        status: 'error',
+        message: 'El nombre completo es requerido',
+      });
+      return false;
+    }
+
+    if (!formData.email.trim()) {
+      setFormStatus({
+        status: 'error',
+        message: 'El email es requerido',
+      });
+      return false;
+    }
+
+    if (!isValidEmail(formData.email)) {
+      setFormStatus({
+        status: 'error',
+        message: 'Por favor ingresa un email válido',
+      });
+      return false;
+    }
+
+    if (!formData.subject.trim()) {
+      setFormStatus({
+        status: 'error',
+        message: 'El asunto es requerido',
+      });
+      return false;
+    }
+
+    if (!formData.message.trim()) {
+      setFormStatus({
+        status: 'error',
+        message: 'El mensaje no puede estar vacío',
+      });
+      return false;
+    }
+
+    return true;
+  };
+
+  // Manejar envío del formulario
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Aquí iría la lógica de envío del formulario
-    console.log('Form submitted:', formData);
+
+    if (!isEmailJSConfigured()) {
+      setFormStatus({
+        status: 'error',
+        message: 'El servicio de email no está configurado correctamente',
+      });
+      return;
+    }
+
+    if (!validateForm()) {
+      return;
+    }
+
+    setFormStatus({
+      status: 'loading',
+      message: 'Enviando mensaje...',
+    });
+
+    try {
+      await emailjs.send(
+        EMAILJS_CONFIG.SERVICE_ID,
+        EMAILJS_CONFIG.TEMPLATE_ID,
+        {
+          from_name: formData.fullName,
+          from_email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          reply_to: formData.email,
+        }
+      );
+
+      setFormStatus({
+        status: 'success',
+        message: '¡Mensaje enviado exitosamente! Te contactaré pronto.',
+      });
+
+      // Limpiar formulario
+      setFormData({
+        fullName: '',
+        email: '',
+        subject: '',
+        message: '',
+      });
+
+      // Limpiar mensaje de éxito después de 5 segundos
+      setTimeout(() => {
+        setFormStatus({
+          status: 'idle',
+          message: '',
+        });
+      }, 5000);
+    } catch (error) {
+      console.error('Error enviando email:', error);
+      setFormStatus({
+        status: 'error',
+        message: 'Error al enviar el mensaje. Por favor intenta de nuevo.',
+      });
+    }
   };
 
   return (
@@ -58,8 +192,8 @@ export function Contact({ isDark, t, colors }: ContactProps) {
                 {
                   icon: Mail,
                   label: 'Email',
-                  value: CONTACT_INFO.email,
-                  href: `mailto:${CONTACT_INFO.email}`,
+                  value: 'dieryvale.01@gmail.com',
+                  href: `mailto:dieryvale.01@gmail.com`,
                   bg: isDark ? '#1E3A5F' : '#DBEAFE',
                   color: isDark ? '#93C5FD' : '#1D4ED8',
                   faIcon: null,
@@ -68,7 +202,7 @@ export function Contact({ isDark, t, colors }: ContactProps) {
                   icon: null,
                   label: 'WhatsApp',
                   value: CONTACT_INFO.phone,
-                  href: 'https://wa.me/',
+                  href: 'https://wa.me/3173358492',
                   bg: isDark ? '#052e16' : '#DCFCE7',
                   color: isDark ? '#86EFAC' : '#15803D',
                   faIcon: FaWhatsapp,
@@ -77,7 +211,7 @@ export function Contact({ isDark, t, colors }: ContactProps) {
                   icon: null,
                   label: 'GitHub',
                   value: 'github.com/dieryvalencia',
-                  href: '#',
+                  href: 'https://github.com/DieryValencia',
                   bg: isDark ? '#1E293B' : '#F1F5F9',
                   color: isDark ? '#94A3B8' : '#0F172A',
                   faIcon: FaGithub,
@@ -186,14 +320,42 @@ export function Contact({ isDark, t, colors }: ContactProps) {
               </div>
               <button
                 type="submit"
-                className="w-full py-3.5 rounded-xl text-sm font-bold text-white transition-all hover:opacity-90 hover:scale-[1.01]"
+                disabled={formStatus.status === 'loading'}
+                className="w-full py-3.5 rounded-xl text-sm font-bold text-white transition-all hover:opacity-90 hover:scale-[1.01] disabled:opacity-60 disabled:cursor-not-allowed disabled:scale-100"
                 style={{
                   background: 'linear-gradient(135deg,#2563EB,#1D4ED8)',
                   boxShadow: '0 4px 20px rgba(37,99,235,0.3)',
                 }}
               >
-                {t.contact.form.send}
+                {formStatus.status === 'loading' ? 'Enviando...' : t.contact.form.send}
               </button>
+              
+              {/* Mensajes de estado */}
+              {formStatus.status === 'success' && (
+                <div
+                  className="p-4 rounded-xl text-sm font-medium border"
+                  style={{
+                    background: isDark ? '#052e16' : '#DCFCE7',
+                    borderColor: isDark ? '#22c55e' : '#86EFAC',
+                    color: isDark ? '#86EFAC' : '#15803D',
+                  }}
+                >
+                  ✓ {formStatus.message}
+                </div>
+              )}
+
+              {formStatus.status === 'error' && (
+                <div
+                  className="p-4 rounded-xl text-sm font-medium border"
+                  style={{
+                    background: isDark ? '#7f1d1d' : '#FEE2E2',
+                    borderColor: isDark ? '#f87171' : '#FECACA',
+                    color: isDark ? '#f87171' : '#DC2626',
+                  }}
+                >
+                  ✕ {formStatus.message}
+                </div>
+              )}
             </form>
           </div>
         </div>
