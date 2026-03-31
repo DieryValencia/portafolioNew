@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { Technology } from '@/types';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface TechnologiesProps {
   isDark: boolean;
@@ -24,7 +23,7 @@ export function Technologies({ isDark, technologies, colors }: TechnologiesProps
   useEffect(() => {
     if (!isAutoScroll || !techRef.current) return;
 
-    const scrollDistance = 240; // aproximadamente el ancho de una tarjeta + gap
+    const scrollDistance = 110; // aproximadamente el ancho de una tarjeta compacta + gap
 
     autoScrollRef.current = setInterval(() => {
       if (techRef.current) {
@@ -52,29 +51,15 @@ export function Technologies({ isDark, technologies, colors }: TechnologiesProps
     setTimeout(() => setIsAutoScroll(true), 2000);
   };
 
-  const handlePrev = () => {
-    handleUserInteraction();
-    if (techRef.current) {
-      techRef.current.scrollBy({ left: -240, behavior: 'smooth' });
-    }
-  };
-
-  const handleNext = () => {
-    handleUserInteraction();
-    if (techRef.current) {
-      techRef.current.scrollBy({ left: 240, behavior: 'smooth' });
-    }
-  };
-
   return (
-    <div className="mt-16">
-      <h3 className="text-lg font-bold text-center mb-6" style={{ color: isDark ? '#F1F5F9' : '#0F172A' }}>
+    <div className="mt-20">
+      <h3 className="text-lg font-bold text-center mb-8" style={{ color: isDark ? '#F1F5F9' : '#0F172A' }}>
         Stack
       </h3>
-      <div className="relative overflow-visible">
+      <div className="relative overflow-hidden">
         {/* Gradientes de fade izquierda y derecha */}
         <div
-          className="absolute left-0 top-0 bottom-0 w-12 md:w-16 z-10 pointer-events-none"
+          className="absolute left-0 top-0 bottom-0 w-8 md:w-12 z-10 pointer-events-none"
           style={{
             background: isDark
               ? 'linear-gradient(to right, #0F172A, transparent)'
@@ -82,7 +67,7 @@ export function Technologies({ isDark, technologies, colors }: TechnologiesProps
           }}
         />
         <div
-          className="absolute right-0 top-0 bottom-0 w-12 md:w-16 z-10 pointer-events-none"
+          className="absolute right-0 top-0 bottom-0 w-8 md:w-12 z-10 pointer-events-none"
           style={{
             background: isDark
               ? 'linear-gradient(to left, #0F172A, transparent)'
@@ -90,20 +75,18 @@ export function Technologies({ isDark, technologies, colors }: TechnologiesProps
           }}
         />
 
-        {/* Slider con scroll nativo */}
+        {/* Slider con scroll nativo - COMPACTO */}
         <div
           ref={techRef}
-          className="flex gap-4 overflow-x-auto scroll-smooth px-4 md:px-8"
+          className="flex gap-3 overflow-x-auto scroll-smooth px-4"
           style={{
             scrollBehavior: 'smooth',
-            scrollSnapType: 'x mandatory',
-            msOverflowStyle: 'none', // IE y Edge
-            scrollbarWidth: 'none', // Firefox
+            msOverflowStyle: 'none',
+            scrollbarWidth: 'none',
           }}
           onMouseDown={handleUserInteraction}
           onTouchStart={handleUserInteraction}
         >
-          {/* Ocultar scrollbar de Chrome, Safari, etc. */}
           <style>{`
             div::-webkit-scrollbar {
               display: none;
@@ -115,49 +98,22 @@ export function Technologies({ isDark, technologies, colors }: TechnologiesProps
             return (
               <div
                 key={i}
-                className="flex-shrink-0 flex flex-col items-center gap-2 px-5 py-4 rounded-xl cursor-default group transition-all hover:-translate-y-1 scroll-snap-align-start"
+                className="flex-shrink-0 flex flex-col items-center gap-2 px-4 py-3 rounded-lg cursor-default group transition-all hover:-translate-y-1"
                 style={{
                   background: colors.bg2,
                   border: `1px solid ${colors.border}`,
-                  scrollSnapAlign: 'start',
-                  minWidth: '180px',
+                  minWidth: '100px',
+                  maxWidth: '100px',
                 }}
               >
-                <Icon className="w-7 h-7 group-hover:scale-110 transition-transform" style={{ color: tech.color }} />
-                <span className="text-xs font-semibold whitespace-nowrap" style={{ color: colors.muted }}>
+                <Icon className="w-6 h-6 group-hover:scale-110 transition-transform" style={{ color: tech.color }} />
+                <span className="text-xs font-semibold whitespace-nowrap text-center" style={{ color: colors.muted }}>
                   {tech.label}
                 </span>
               </div>
             );
           })}
         </div>
-
-        {/* Botones de navegación */}
-        <button
-          onClick={handlePrev}
-          aria-label="Slider anterior"
-          className="absolute left-0 top-1/2 -translate-y-1/2 z-20 p-2 rounded-lg transition-all hover:scale-110 hidden md:flex items-center justify-center"
-          style={{
-            background: isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)',
-            color: isDark ? '#F1F5F9' : '#0F172A',
-            backdropFilter: 'blur(4px)',
-          }}
-        >
-          <ChevronLeft className="w-5 h-5" />
-        </button>
-
-        <button
-          onClick={handleNext}
-          aria-label="Slider siguiente"
-          className="absolute right-0 top-1/2 -translate-y-1/2 z-20 p-2 rounded-lg transition-all hover:scale-110 hidden md:flex items-center justify-center"
-          style={{
-            background: isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)',
-            color: isDark ? '#F1F5F9' : '#0F172A',
-            backdropFilter: 'blur(4px)',
-          }}
-        >
-          <ChevronRight className="w-5 h-5" />
-        </button>
       </div>
     </div>
   );
