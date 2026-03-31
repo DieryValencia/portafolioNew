@@ -2,14 +2,14 @@ export const PROFILE_PHOTO = 'https://i.imgur.com/F1Wb0V6.jpg';
 export const FOX_ILLUSTRATION = 'https://i.imgur.com/v2HCHPp.png';
 
 export const SOCIAL_LINKS = {
-  whatsapp: 'https://wa.me/',
-  github: '#',
-  linkedin: '#',
-  instagram: '#',
+  whatsapp: 'https://wa.me/3173358492',
+  github: 'https://github.com/DieryValencia',
+  linkedin: 'https://linkedin.com/in/dieryvalencia',
+  instagram: 'https://instagram.com/dieryvalencia',
 };
 
 export const CONTACT_INFO = {
-  email: 'diery.valencia@email.com',
+  email: 'dieryvalencia@gmail.com',
   phone: '+57 3173358492',
   location: 'Pasto, Nariño · Colombia',
 };
