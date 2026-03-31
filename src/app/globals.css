@@ -76,6 +76,17 @@ html.dark {
   }
 }
 
+@keyframes slideDown {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 /* Objetos flotantes — reflejo en dark mode */
 .float-obj-light {
   display: block;

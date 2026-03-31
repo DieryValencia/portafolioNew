@@ -54,6 +54,9 @@ export default function Home() {
         }}
       />
 
+      {/* Spacer para compensar header fijo */}
+      <div className="h-16" />
+
       <Hero
         isDark={isDark}
         t={t}
