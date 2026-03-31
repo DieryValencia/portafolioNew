@@ -56,7 +56,8 @@ export function Technologies({ isDark, technologies, colors }: TechnologiesProps
       <h3 className="text-lg font-bold text-center mb-8" style={{ color: isDark ? '#F1F5F9' : '#0F172A' }}>
         Stack
       </h3>
-      <div className="relative overflow-hidden">
+      <div className="flex justify-center">
+        <div className="relative overflow-hidden" style={{ width: 'fit-content', maxWidth: '100vw' }}>
         {/* Gradientes de fade izquierda y derecha */}
         <div
           className="absolute left-0 top-0 bottom-0 w-8 md:w-12 z-10 pointer-events-none"
@@ -113,6 +114,7 @@ export function Technologies({ isDark, technologies, colors }: TechnologiesProps
               </div>
             );
           })}
+        </div>
         </div>
       </div>
     </div>
