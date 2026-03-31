@@ -72,7 +72,7 @@ export function Header({ isDark, language, t, onThemeToggle, onLanguageToggle, c
           <nav className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
             {/* Logo */}
             <Link href="#hero" className="text-lg font-bold tracking-tight" style={{ color: isDark ? '#F1F5F9' : '#0F172A' }}>
-              Diery<span style={{ color: '#F97316' }}> Valencia</span>
+              Diery<span style={{ color: isDark ? '#F1F5F9' : '#0F172A' }}> Valencia</span>
             </Link>
 
             {/* Right Side Controls - Always visible */}
