@@ -1,6 +1,6 @@
 # 🦊 Portafolio Profesional - Diery Valencia
 
-Portafolio Personal moderno y responsive construido con **Next.js 16**, **TypeScript** y **Tailwind CSS**, listo para despliegue en Vercel.
+Portafolio Personal moderno y responsive construido con **Next.js 16**, **TypeScript** y **Tailwind CSS**.
 
 ## ✨ Características
 
