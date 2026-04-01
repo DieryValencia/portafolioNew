@@ -6,6 +6,16 @@ import { FaWhatsapp } from 'react-icons/fa';
 import { Translation } from '@/types';
 import { useState, useRef, useEffect } from 'react';
 
+// Función para scroll suave a elementos con ID
+const scrollToSection = (href: string) => {
+  if (href.startsWith('#')) {
+    const element = document.getElementById(href.slice(1));
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+};
+
 interface HeaderProps {
   isDark: boolean;
   language: 'es' | 'en';
@@ -25,7 +35,7 @@ export function Header({ isDark, language, t, onThemeToggle, onLanguageToggle, c
   const headerRef = useRef<HTMLDivElement>(null);
 
   const navLinks = [
-    { label: t.nav.projects,  href: '#proyects' },
+    { label: t.nav.projects,  href: '#proyectos' },
     { label: t.nav.education, href: '#estudios' },
     { label: 'Testimonios',   href: '#testimonios' },
     { label: t.nav.contact,   href: '#contacto' },
@@ -71,9 +81,17 @@ export function Header({ isDark, language, t, onThemeToggle, onLanguageToggle, c
         >
           <nav className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
             {/* Logo */}
-            <Link href="#hero" className="text-lg font-bold tracking-tight" style={{ color: isDark ? '#F1F5F9' : '#0F172A' }}>
+            <a
+              href="#hero"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection('#hero');
+              }}
+              className="text-lg font-bold tracking-tight cursor-pointer"
+              style={{ color: isDark ? '#F1F5F9' : '#0F172A' }}
+            >
               Diery<span style={{ color: isDark ? '#F1F5F9' : '#0F172A' }}> Valencia</span>
-            </Link>
+            </a>
 
             {/* Right Side Controls - Always visible */}
             <div className="flex items-center gap-3">
@@ -138,15 +156,22 @@ export function Header({ isDark, language, t, onThemeToggle, onLanguageToggle, c
         >
           <nav className="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-2">
             {navLinks.map((link) => (
-              <Link
+              <a
                 key={link.href}
                 href={link.href}
-                onClick={() => setMenuOpen(false)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setMenuOpen(false);
+                  scrollToSection(link.href);
+                }}
                 className="px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200"
                 style={{
                   color: colors.muted,
                   background: 'rgba(37, 99, 235, 0.05)',
-                  borderLeft: '3px solid transparent',
+                  borderLeftWidth: '3px',
+                  borderLeftStyle: 'solid',
+                  borderLeftColor: 'transparent',
+                  cursor: 'pointer',
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.borderLeftColor = '#2563EB';
@@ -158,7 +183,7 @@ export function Header({ isDark, language, t, onThemeToggle, onLanguageToggle, c
                 }}
               >
                 {link.label}
-              </Link>
+              </a>
             ))}
           </nav>
         </div>

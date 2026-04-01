@@ -45,7 +45,9 @@ export function About({ isDark, t, colors }: AboutProps) {
                 style={{
                   width: '312px',
                   height: '312px',
-                  border: `2px dashed ${isDark ? '#334155' : '#BFDBFE'}`,
+                  borderWidth: '2px',
+                  borderStyle: 'dashed',
+                  borderColor: isDark ? '#334155' : '#BFDBFE',
                   animation: 'spin 18s linear infinite',
                   borderImageSource: 'linear-gradient(135deg, #2563EB, #F97316)',
                 }}

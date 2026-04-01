@@ -23,6 +23,7 @@ export function Testimonials({ isDark, t, colors }: TestimonialsProps) {
 
   return (
     <section
+      id="testimonios"
       className="py-24"
       style={{
         background: colors.bg,
