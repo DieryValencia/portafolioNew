@@ -8,12 +8,13 @@ export function FloatingObjects() {
     <div
       style={{
         display: 'grid',
-        gridTemplateColumns: '80px 1fr 80px',
+        gridTemplateColumns: '70px 1fr 70px',
         gridTemplateRows: 'auto auto auto',
-        gap: '10px',
+        gap: '4px',
         width: '100%',
         maxWidth: '500px',
         alignItems: 'center',
+        justifyItems: 'center',
       }}
     >
       {/* Fila 1 */}
@@ -28,11 +29,11 @@ export function FloatingObjects() {
       </div>
 
       {/* Fila 2 */}
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '14px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
         <div style={{ animation: 'floatObj 4.2s ease-in-out infinite 0.3s' }}>
           <GitBranch />
         </div>
-        <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#A78BFA' }} />
+        <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#A78BFA' }} />
       </div>
 
       <div style={{ animation: 'heroFloat 4s ease-in-out infinite' }}>
@@ -51,11 +52,11 @@ export function FloatingObjects() {
         />
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '14px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
         <div style={{ animation: 'floatObj 5s ease-in-out infinite 2s' }}>
           <DockerIcon />
         </div>
-        <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#34D399' }} />
+        <div style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#34D399' }} />
       </div>
 
       {/* Fila 3 */}
@@ -63,7 +64,7 @@ export function FloatingObjects() {
         <TSBadge />
       </div>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <div style={{ width: '9px', height: '9px', borderRadius: '50%', background: '#FB7185' }} />
+        <div style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#FB7185' }} />
       </div>
       <div style={{ animation: 'floatObj 3.8s ease-in-out infinite 0.5s', display: 'flex', justifyContent: 'center' }}>
         <GraphQLBadge />
