@@ -35,10 +35,10 @@ export function Header({ isDark, language, t, onThemeToggle, onLanguageToggle, c
   const headerRef = useRef<HTMLDivElement>(null);
 
   const navLinks = [
-    { label: t.nav.projects,  href: '#proyectos' },
-    { label: t.nav.education, href: '#estudios' },
-    { label: 'Testimonios',   href: '#testimonios' },
-    { label: t.nav.contact,   href: '#contacto' },
+    { label: t.nav.projects,      href: '#proyectos' },
+    { label: t.nav.education,     href: '#estudios' },
+    { label: t.nav.Testimonials,  href: '#testimonios' },
+    { label: t.nav.contact,       href: '#contacto' },
   ];
 
   // Cerrar menú al hacer click fuera

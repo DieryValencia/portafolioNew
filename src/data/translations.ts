@@ -5,6 +5,7 @@ export const translations: Record<'es' | 'en', Translation> = {
     nav: {
       projects: 'Proyectos',
       education: 'Estudios',
+      Testimonials: 'Testimonios',
       contact: 'Contacto',
     },
     hero: {
@@ -153,6 +154,7 @@ export const translations: Record<'es' | 'en', Translation> = {
     nav: {
       projects: 'Projects',
       education: 'Education',
+      Testimonials: 'Testimonials',
       contact: 'Contact',
     },
     hero: {

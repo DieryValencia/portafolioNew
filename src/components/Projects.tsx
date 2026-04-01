@@ -1,7 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import { ExternalLink } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';
 import { Translation, Project } from '@/types';
@@ -134,20 +133,24 @@ export function Projects({ isDark, t, projectsData, colors }: ProjectsProps) {
 
                       {/* Botones */}
                       <div className="flex gap-3 pt-1">
-                        <Link
+                        <a
                           href={p.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white transition-all hover:opacity-90"
                           style={{ background: isDark ? '#334155' : '#0F172A' }}
                         >
                           <FaGithub className="w-4 h-4" /> GitHub
-                        </Link>
-                        <Link
+                        </a>
+                        <a
                           href={p.demo}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all hover:opacity-90"
                           style={{ border: `2px solid ${colors.blue}`, color: colors.blue }}
                         >
                           <ExternalLink className="w-4 h-4" /> Demo
-                        </Link>
+                        </a>
                       </div>
                     </div>
                   </div>

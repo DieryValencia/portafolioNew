@@ -1,7 +1,6 @@
 'use client';
 
 import { Download } from 'lucide-react';
-import Link from 'next/link';
 import { Translation } from '@/types';
 import { FloatingObjects } from './FloatingObjects';
 
@@ -123,7 +122,7 @@ export function Hero({ isDark, t, colors }: HeroProps) {
                 <Download className="w-4 h-4" />
                 {t.hero.downloadCV}
               </a>
-              <Link
+              <a
                 href="#proyectos"
                 className="px-7 py-3 rounded-xl text-sm font-semibold transition-all hover:scale-105"
                 style={{
@@ -139,7 +138,7 @@ export function Hero({ isDark, t, colors }: HeroProps) {
                 }}
               >
                 {t.hero.viewProjects}
-              </Link>
+              </a>
             </div>
           </div>
 
