@@ -25,10 +25,10 @@ export function Header({ isDark, language, t, onThemeToggle, onLanguageToggle, c
   const headerRef = useRef<HTMLDivElement>(null);
 
   const navLinks = [
-    { label: t.nav.projects, href: '#proyectos' },
+    { label: t.nav.projects,  href: '#proyects' },
     { label: t.nav.education, href: '#estudios' },
-    { label: 'Testimonios', href: '#testimonios' },
-    { label: t.nav.contact, href: '#contacto' },
+    { label: 'Testimonios',   href: '#testimonios' },
+    { label: t.nav.contact,   href: '#contacto' },
   ];
 
   // Cerrar menú al hacer click fuera
@@ -96,7 +96,7 @@ export function Header({ isDark, language, t, onThemeToggle, onLanguageToggle, c
                 {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
               </button>
               <a
-                href="https://wa.me/"
+                href="https://wa.me/3173358492"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 flex items-center justify-center rounded-lg transition-colors hover:bg-green-50 dark:hover:bg-green-950/30"
