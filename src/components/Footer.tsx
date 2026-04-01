@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { FaGithub, FaLinkedin, FaWhatsapp, FaInstagram } from 'react-icons/fa';
 
 interface FooterProps {
@@ -35,10 +34,12 @@ export function Footer({ isDark, t }: FooterProps) {
         {/* Redes sociales */}
         <div className="flex justify-center gap-3 mb-8">
           {socialLinks.map(({ icon: Icon, label, color, hoverBg, href }) => (
-            <Link
+            <a
               key={label}
               href={href}
               title={label}
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-11 h-11 rounded-xl flex items-center justify-center transition-all hover:scale-110"
               style={{
                 background: 'rgba(255,255,255,0.05)',
@@ -60,7 +61,7 @@ export function Footer({ isDark, t }: FooterProps) {
               aria-label={label}
             >
               <Icon className="w-5 h-5" />
-            </Link>
+            </a>
           ))}
         </div>
 

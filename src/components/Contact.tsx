@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { Mail } from 'lucide-react';
 import { FaWhatsapp, FaGithub } from 'react-icons/fa';
 import { Translation } from '@/types';
@@ -219,7 +218,7 @@ export function Contact({ isDark, t, colors }: ContactProps) {
               ].map((c, i) => {
                 const Icon = c.icon || c.faIcon;
                 return (
-                  <Link
+                  <a
                     key={i}
                     href={c.href}
                     target={c.href.startsWith('http') ? '_blank' : undefined}
@@ -251,7 +250,7 @@ export function Contact({ isDark, t, colors }: ContactProps) {
                         {c.value}
                       </p>
                     </div>
-                  </Link>
+                  </a>
                 );
               })}
             </div>

@@ -1,3 +1,5 @@
+import type React from 'react';
+
 export type Language = 'es' | 'en';
 export type Theme = 'light' | 'dark';
 
