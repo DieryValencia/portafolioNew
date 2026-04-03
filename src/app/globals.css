@@ -5,6 +5,15 @@
   font-family: 'Montserrat', sans-serif;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+/* Compensación del header fijo para anclas de sección */
+section[id] {
+  scroll-margin-top: 64px;
+}
+
 :root {
   --c-bg: #f8fafc;
   --c-bg2: #ffffff;

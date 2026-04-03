@@ -25,6 +25,7 @@ export function About({ isDark, t, colors }: AboutProps) {
 
   return (
     <section
+      id="about"
       className="py-24"
       style={{
         background: colors.bg2,

@@ -6,13 +6,16 @@ import { FaWhatsapp } from 'react-icons/fa';
 import { Translation } from '@/types';
 import { useState, useRef, useEffect } from 'react';
 
-// Función para scroll suave a elementos con ID
+// Altura del header fijo (h-16 = 64px)
+const HEADER_HEIGHT = 64;
+
+// Scroll suave con compensación del header fijo
 const scrollToSection = (href: string) => {
-  if (href.startsWith('#')) {
-    const element = document.getElementById(href.slice(1));
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+  const id = href.startsWith('#') ? href.slice(1) : href;
+  const element = document.getElementById(id);
+  if (element) {
+    const top = element.getBoundingClientRect().top + window.scrollY - HEADER_HEIGHT;
+    window.scrollTo({ top, behavior: 'smooth' });
   }
 };
 
@@ -32,9 +35,15 @@ interface HeaderProps {
 
 export function Header({ isDark, language, t, onThemeToggle, onLanguageToggle, colors }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
+
+  // IMPORTANTE: headerRef debe envolver TANTO el header como el dropdown.
+  // Si el dropdown queda fuera del ref, cualquier mousedown sobre un link del menú
+  // activa handleClickOutside → setMenuOpen(false) → el link desaparece del DOM
+  // antes de que el evento 'click' se ejecute → la navegación nunca ocurre.
   const headerRef = useRef<HTMLDivElement>(null);
 
   const navLinks = [
+    { label: t.nav.about,         href: '#about' },
     { label: t.nav.projects,      href: '#proyectos' },
     { label: t.nav.education,     href: '#estudios' },
     { label: t.nav.Testimonials,  href: '#testimonios' },
@@ -68,6 +77,8 @@ export function Header({ isDark, language, t, onThemeToggle, onLanguageToggle, c
 
   return (
     <>
+      {/* headerRef envuelve el header Y el dropdown para que handleClickOutside
+          no se active cuando el usuario hace mousedown sobre un link del menú */}
       <div ref={headerRef}>
         <header
           className="fixed top-0 left-0 right-0 z-50 border-b"
@@ -138,56 +149,59 @@ export function Header({ isDark, language, t, onThemeToggle, onLanguageToggle, c
             </div>
           </nav>
         </header>
-      </div>
 
-      {/* Navigation Menu Dropdown - Fixed position below header */}
-      {menuOpen && (
-        <div
-          id="nav-menu"
-          className="fixed top-16 left-0 right-0 z-40 border-t transition-all duration-300 ease-out"
-          style={{
-            background: isDark 
-              ? 'rgba(15, 23, 42, 0.98)' 
-              : 'rgba(248, 250, 252, 0.98)',
-            borderTopColor: colors.border,
-            backdropFilter: 'blur(10px)',
-            animation: 'slideDown 300ms ease-out',
-          }}
-        >
-          <nav className="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-2">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  setMenuOpen(false);
-                  scrollToSection(link.href);
-                }}
-                className="px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200"
-                style={{
-                  color: colors.muted,
-                  background: 'rgba(37, 99, 235, 0.05)',
-                  borderLeftWidth: '3px',
-                  borderLeftStyle: 'solid',
-                  borderLeftColor: 'transparent',
-                  cursor: 'pointer',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderLeftColor = '#2563EB';
-                  e.currentTarget.style.background = 'rgba(37, 99, 235, 0.1)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderLeftColor = 'transparent';
-                  e.currentTarget.style.background = 'rgba(37, 99, 235, 0.05)';
-                }}
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
-        </div>
-      )}
+        {/* Navigation Menu Dropdown — dentro del mismo div ref={headerRef}
+            para que mousedown sobre los links no active handleClickOutside */}
+        {menuOpen && (
+          <div
+            id="nav-menu"
+            className="fixed top-16 left-0 right-0 z-40 border-t transition-all duration-300 ease-out"
+            style={{
+              background: isDark 
+                ? 'rgba(15, 23, 42, 0.98)' 
+                : 'rgba(248, 250, 252, 0.98)',
+              borderTopColor: colors.border,
+              backdropFilter: 'blur(10px)',
+              animation: 'slideDown 300ms ease-out',
+            }}
+          >
+            <nav className="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-2">
+              {navLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    // Cerrar menú, luego scroll con delay de 50ms para que
+                    // el colapso del dropdown no interfiera con getBoundingClientRect
+                    setMenuOpen(false);
+                    setTimeout(() => scrollToSection(link.href), 50);
+                  }}
+                  className="px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200"
+                  style={{
+                    color: colors.muted,
+                    background: 'rgba(37, 99, 235, 0.05)',
+                    borderLeftWidth: '3px',
+                    borderLeftStyle: 'solid',
+                    borderLeftColor: 'transparent',
+                    cursor: 'pointer',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderLeftColor = '#2563EB';
+                    e.currentTarget.style.background = 'rgba(37, 99, 235, 0.1)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderLeftColor = 'transparent';
+                    e.currentTarget.style.background = 'rgba(37, 99, 235, 0.05)';
+                  }}
+                >
+                  {link.label}
+                </a>
+              ))}
+            </nav>
+          </div>
+        )}
+      </div>
     </>
   );
 }
