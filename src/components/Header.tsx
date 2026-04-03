@@ -43,6 +43,7 @@ export function Header({ isDark, language, t, onThemeToggle, onLanguageToggle, c
   const headerRef = useRef<HTMLDivElement>(null);
 
   const navLinks = [
+    { label: t.nav.about,         href: '#about' },
     { label: t.nav.projects,      href: '#proyectos' },
     { label: t.nav.education,     href: '#estudios' },
     { label: t.nav.Testimonials,  href: '#testimonios' },

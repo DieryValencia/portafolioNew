@@ -3,6 +3,7 @@ import { Translation } from '@/types';
 export const translations: Record<'es' | 'en', Translation> = {
   es: {
     nav: {
+      about: 'Acerca de mí',
       projects: 'Proyectos',
       education: 'Estudios',
       Testimonials: 'Testimonios',
@@ -152,6 +153,7 @@ export const translations: Record<'es' | 'en', Translation> = {
   },
   en: {
     nav: {
+      about: 'About Me',
       projects: 'Projects',
       education: 'Education',
       Testimonials: 'Testimonials',

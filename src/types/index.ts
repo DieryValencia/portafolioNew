@@ -5,6 +5,7 @@ export type Theme = 'light' | 'dark';
 
 export interface Translation {
   nav: {
+    about: string;
     projects: string;
     education: string;
     contact: string;
