@@ -6,13 +6,16 @@ import { FaWhatsapp } from 'react-icons/fa';
 import { Translation } from '@/types';
 import { useState, useRef, useEffect } from 'react';
 
-// Función para scroll suave a elementos con ID
+// Altura del header fijo (h-16 = 64px)
+const HEADER_HEIGHT = 64;
+
+// Scroll suave con compensación del header fijo
 const scrollToSection = (href: string) => {
-  if (href.startsWith('#')) {
-    const element = document.getElementById(href.slice(1));
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+  const id = href.startsWith('#') ? href.slice(1) : href;
+  const element = document.getElementById(id);
+  if (element) {
+    const top = element.getBoundingClientRect().top + window.scrollY - HEADER_HEIGHT;
+    window.scrollTo({ top, behavior: 'smooth' });
   }
 };
 
@@ -161,8 +164,11 @@ export function Header({ isDark, language, t, onThemeToggle, onLanguageToggle, c
                 href={link.href}
                 onClick={(e) => {
                   e.preventDefault();
-                  setMenuOpen(false);
+                  // Primero hacer scroll, luego cerrar el menú
+                  // El delay evita que el reflow del cierre del menú
+                  // afecte el cálculo de posición del elemento destino
                   scrollToSection(link.href);
+                  setTimeout(() => setMenuOpen(false), 50);
                 }}
                 className="px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200"
                 style={{
