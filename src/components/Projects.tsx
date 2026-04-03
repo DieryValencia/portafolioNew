@@ -95,7 +95,9 @@ export function Projects({ isDark, t, projectsData, colors }: ProjectsProps) {
                           src={project.image}
                           alt={project.title}
                           fill
+                          sizes="(max-width: 768px) 100vw, 500px"
                           className="object-cover"
+                          quality={75}
                           onError={() => handleImageError(i)}
                         />
                       ) : (

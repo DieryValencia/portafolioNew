@@ -40,8 +40,10 @@ export function FloatingObjects() {
         <Image
           src={FOX_ILLUSTRATION}
           alt="Developer fox"
-          width={300}
+          width={400}
           height={400}
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 300px, 400px"
+          quality={85}
           style={{
             width: '100%',
             height: 'auto',

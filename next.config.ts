@@ -8,6 +8,13 @@ const nextConfig: NextConfig = {
         hostname: 'i.imgur.com',
       },
     ],
+    formats: ['image/avif', 'image/webp'],
+  },
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
+  experimental: {
+    optimizePackageImports: ['lucide-react', 'react-icons'],
   },
   turbopack: {
     root: __dirname,
