@@ -81,8 +81,10 @@ export function About({ isDark, t, colors }: AboutProps) {
                     src={PROFILE_PHOTO}
                     alt="Diery Valencia"
                     fill
+                    sizes="(max-width: 768px) 272px, 272px"
                     className="object-cover object-center"
                     priority
+                    quality={85}
                     onError={() => setPhotoError(true)}
                   />
                 ) : (
