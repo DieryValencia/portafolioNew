@@ -100,6 +100,7 @@ export function Header({ isDark, language, t, onThemeToggle, onLanguageToggle, c
               }}
               className="text-lg font-bold tracking-tight cursor-pointer"
               style={{ color: isDark ? '#F1F5F9' : '#0F172A' }}
+              aria-label="Diery Valencia - Ir al inicio"
             >
               Diery<span style={{ color: isDark ? '#F1F5F9' : '#0F172A' }}> Valencia</span>
             </a>

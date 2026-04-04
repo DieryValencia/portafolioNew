@@ -271,7 +271,7 @@ export function Contact({ isDark, t, colors }: ContactProps) {
                 { label: t.contact.form.subject, type: 'text', ph: t.contact.form.placeholders.subject, key: 'subject' },
               ].map((f) => (
                 <div key={f.key}>
-                  <label className="block text-sm font-semibold mb-2" style={{ color: isDark ? '#94A3B8' : '#374151' }}>
+                  <label className="block text-sm font-semibold mb-2" style={{ color: isDark ? '#CBD5E1' : '#374151' }}>
                     {f.label}
                   </label>
                   <input

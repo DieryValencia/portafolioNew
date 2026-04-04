@@ -57,89 +57,91 @@ export default function Home() {
       {/* Spacer para compensar header fijo */}
       <div className="h-16" />
 
-      <Hero
-        isDark={isDark}
-        t={t}
-        colors={colors}
-      />
+      <main id="main-content" aria-label={t.hero.subtitle}>
+        <Hero
+          isDark={isDark}
+          t={t}
+          colors={colors}
+        />
 
-      <About
-        isDark={isDark}
-        t={t}
-        colors={colors}
-      />
+        <About
+          isDark={isDark}
+          t={t}
+          colors={colors}
+        />
 
-      <Projects
-        isDark={isDark}
-        t={t}
-        projectsData={projectsData}
-        colors={colors}
-      />
+        <Projects
+          isDark={isDark}
+          t={t}
+          projectsData={projectsData}
+          colors={colors}
+        />
 
-      <section
-        style={{
-          background: colors.bg,
-          borderBottom: `1px solid ${colors.border}`,
-        }}
-      >
-        <div className="max-w-6xl mx-auto px-6 pb-0 pt-0">
-          <Technologies
-            isDark={isDark}
-            technologies={technologies}
-            colors={{
-              bg: colors.bg,
-              bg2: colors.bg2,
-              muted: colors.muted,
-              border: colors.border,
-            }}
-          />
-        </div>
-      </section>
+        <section
+          aria-label={t.nav.projects}
+          style={{
+            background: colors.bg,
+            borderBottom: `1px solid ${colors.border}`,
+          }}
+        >
+          <div className="max-w-6xl mx-auto px-6 pb-0 pt-0">
+            <Technologies
+              isDark={isDark}
+              technologies={technologies}
+              colors={{
+                bg: colors.bg,
+                bg2: colors.bg2,
+                muted: colors.muted,
+                border: colors.border,
+              }}
+            />
+          </div>
+        </section>
+        <Education
+          isDark={isDark}
+          t={t}
+          colors={colors}
+        />
 
-      <Education
-        isDark={isDark}
-        t={t}
-        colors={colors}
-      />
+        <Testimonials
+          isDark={isDark}
+          t={t}
+          colors={{
+            bg: colors.bg,
+            bg2: colors.bg2,
+            text: colors.text,
+            muted: colors.muted,
+            border: colors.border,
+            blue: colors.blue,
+          }}
+        />
 
-      <Testimonials
-        isDark={isDark}
-        t={t}
-        colors={{
-          bg: colors.bg,
-          bg2: colors.bg2,
-          text: colors.text,
-          muted: colors.muted,
-          border: colors.border,
-          blue: colors.blue,
-        }}
-      />
+        <Hobbies
+          isDark={isDark}
+          t={t}
+          hobbyIcons={hobbyIcons}
+          colors={{
+            bg: colors.bg,
+            bg2: colors.bg2,
+            text: colors.text,
+            muted: colors.muted,
+            border: colors.border,
+          }}
+        />
 
-      <Hobbies
-        isDark={isDark}
-        t={t}
-        hobbyIcons={hobbyIcons}
-        colors={{
-          bg: colors.bg,
-          bg2: colors.bg2,
-          text: colors.text,
-          muted: colors.muted,
-          border: colors.border,
-        }}
-      />
-
-      <Contact
-        isDark={isDark}
-        t={t}
-        colors={{
-          bg: colors.bg,
-          bg2: colors.bg2,
-          text: colors.text,
-          muted: colors.muted,
-          border: colors.border,
-          blue: colors.blue,
-        }}
-      />
+        <Contact
+          isDark={isDark}
+          t={t}
+          colors={{
+            bg: colors.bg,
+            bg2: colors.bg2,
+            text: colors.text,
+            muted: colors.muted,
+            border: colors.border,
+            blue: colors.blue,
+          }}
+        />
+      </main>
 
       <Footer
         isDark={isDark}

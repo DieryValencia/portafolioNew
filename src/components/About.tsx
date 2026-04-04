@@ -119,7 +119,7 @@ export function About({ isDark, t, colors }: AboutProps) {
                   key={i}
                   className="leading-relaxed"
                   style={{
-                    color: isDark ? '#94A3B8' : '#475569',
+                    color: colors.muted,
                     fontSize: '0.93rem',
                     lineHeight: 1.85,
                   }}

@@ -51,6 +51,7 @@ export function FloatingObjects() {
             filter: 'drop-shadow(0 12px 32px rgba(249,115,22,0.22))',
           }}
           priority
+          fetchPriority="high"
         />
       </div>
 

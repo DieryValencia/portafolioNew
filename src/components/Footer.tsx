@@ -70,10 +70,10 @@ export function Footer({ isDark, t }: FooterProps) {
 
         {/* Copyright */}
         <div className="flex flex-col sm:flex-row justify-between items-center gap-2">
-          <p className="text-xs" style={{ color: '#475569' }}>
+          <p className="text-xs" style={{ color: '#94A3B8' }}>
             {t.footer.copyright}
           </p>
-          <p className="text-xs" style={{ color: '#334155' }}>
+          <p className="text-xs" style={{ color: '#64748B' }}>
             {t.footer.university}
           </p>
         </div>
