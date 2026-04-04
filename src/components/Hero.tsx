@@ -145,7 +145,7 @@ export function Hero({ isDark, t, colors }: HeroProps) {
           {/* Ilustración flotante */}
           <div className="flex-1 flex justify-center items-center order-1 lg:order-2">
             <div style={{ width: '100%', maxWidth: '500px' }}>
-              <FloatingObjects />
+              <FloatingObjects isDark={isDark} />
             </div>
           </div>
         </div>
