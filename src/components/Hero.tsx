@@ -62,7 +62,7 @@ export function Hero({ isDark, t, colors }: HeroProps) {
               className="font-semibold italic mb-5 max-w-lg mx-auto lg:mx-0"
               style={{
                 fontSize: 'clamp(0.9rem, 1.8vw, 1.05rem)',
-                color: '#F97316',
+                color: isDark ? '#FB923C' : '#C2410C',
                 lineHeight: 1.6,
                 borderLeft: '3px solid #F97316',
                 paddingLeft: '14px',
@@ -127,7 +127,7 @@ export function Hero({ isDark, t, colors }: HeroProps) {
                 className="px-7 py-3 rounded-xl text-sm font-semibold transition-all hover:scale-105"
                 style={{
                   border: '2px solid #F97316',
-                  color: '#F97316',
+                  color: isDark ? '#F97316' : '#C2410C',
                   cursor: 'pointer',
                 }}
                 onMouseEnter={(e) => {

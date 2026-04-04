@@ -21,7 +21,7 @@ export const COLORS = {
     blue: '#2563EB',
     accent: '#F97316',
     text: '#0F172A',
-    muted: '#64748B',
+    muted: '#475569',
     border: '#E2E8F0',
   },
   dark: {
@@ -30,7 +30,7 @@ export const COLORS = {
     blue: '#60A5FA',
     accent: '#FB923C',
     text: '#F1F5F9',
-    muted: '#94A3B8',
+    muted: '#A3B3C7',
     border: '#334155',
   },
 };

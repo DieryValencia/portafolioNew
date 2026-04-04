@@ -141,6 +141,7 @@ export function Projects({ isDark, t, projectsData, colors }: ProjectsProps) {
                           rel="noopener noreferrer"
                           className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white transition-all hover:opacity-90"
                           style={{ background: isDark ? '#334155' : '#0F172A' }}
+                          aria-label={`GitHub - ${project.title}`}
                         >
                           <FaGithub className="w-4 h-4" /> GitHub
                         </a>
@@ -150,6 +151,7 @@ export function Projects({ isDark, t, projectsData, colors }: ProjectsProps) {
                           rel="noopener noreferrer"
                           className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all hover:opacity-90"
                           style={{ border: `2px solid ${colors.blue}`, color: colors.blue }}
+                          aria-label={`Demo - ${project.title}`}
                         >
                           <ExternalLink className="w-4 h-4" /> Demo
                         </a>
