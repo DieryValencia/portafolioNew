@@ -1,12 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
 * {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-montserrat), sans-serif;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+/* Optimization for dark mode render performance */
+html.dark {
+  color-scheme: dark;
 }
 
 /* Compensación del header fijo para anclas de sección */
@@ -35,82 +39,57 @@ html.dark {
 }
 
 @keyframes heroFloat {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-14px);
-  }
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-14px); }
 }
 
 @keyframes floatObj {
-  0%,
-  100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-8px) rotate(3deg);
-  }
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(3deg); }
 }
 
 @keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 @keyframes pulse-dot {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.35;
-  }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
 }
 
 @keyframes shimmer {
-  0% {
-    opacity: 0.55;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0.55;
-  }
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
 }
 
 @keyframes slideDown {
-  from {
-    transform: translateY(-20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
-/* Objetos flotantes — reflejo en dark mode */
-.float-obj-light {
-  display: block;
+/* Infinite loop for Technologies section with pure CSS */
+@keyframes scrollInfinite {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
-.float-obj-dark {
-  display: none;
+.animate-scroll-infinite {
+  display: flex;
+  width: max-content;
+  animation: scrollInfinite 40s linear infinite;
 }
 
-html.dark .float-obj-light {
-  display: none;
+.animate-scroll-infinite:hover {
+  animation-play-state: paused;
 }
 
-html.dark .float-obj-dark {
-  display: block;
+/* Global visibility classes for theme-specific objects */
+.float-obj-light { display: block; }
+.float-obj-dark { display: none; }
+html.dark .float-obj-light { display: none; }
+html.dark .float-obj-dark { 
+  display: block; 
   animation: shimmer 2.5s ease-in-out infinite;
 }
 
@@ -124,29 +103,10 @@ html.dark .float-obj-dark {
   color: #f8fafc;
 }
 
-/* Scrollbar personalizado */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
-}
-
-html.dark ::-webkit-scrollbar-thumb {
-  background: #475569;
-}
-
-html.dark ::-webkit-scrollbar-thumb:hover {
-  background: #64748b;
-}
+/* Custom scrollbar optimized */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+html.dark ::-webkit-scrollbar-thumb { background: #475569; }
+html.dark ::-webkit-scrollbar-thumb:hover { background: #64748b; }
