@@ -5,7 +5,6 @@ export const SOCIAL_LINKS = {
   whatsapp: 'https://wa.me/3173358492',
   github: 'https://github.com/DieryValencia',
   linkedin: 'https://linkedin.com/in/dieryvalencia',
-  instagram: 'https://instagram.com/dieryvalencia',
 };
 
 export const CONTACT_INFO = {
