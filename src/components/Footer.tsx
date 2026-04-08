@@ -22,9 +22,9 @@ interface FooterProps {
 
 export function Footer({ isDark, t }: FooterProps) {
   const socialLinks = [
-    { icon: FaGithub, label: 'GitHub', color: '#94A3B8', hoverBg: '#334155', href: 'https://github.com/DieryValencia' },
-    { icon: FaLinkedin, label: 'LinkedIn', color: '#60A5FA', hoverBg: '#1D4ED8', href: 'https://www.linkedin.com/in/diery-valencia/' },
-    { icon: FaWhatsapp, label: 'WhatsApp', color: '#4ADE80', hoverBg: '#15803D', href: 'https://wa.me/3173358492' },
+    { icon: FaGithub, label: 'GitHub', color: '#94A3B8', hoverBg: '#0c0c0cff', href: 'https://github.com/DieryValencia' },
+    { icon: FaLinkedin, label: 'LinkedIn', color: '#94A3B8', hoverBg: '#1D4ED8', href: 'https://www.linkedin.com/in/diery-valencia/' },
+    { icon: FaWhatsapp, label: 'WhatsApp', color: '#94A3B8', hoverBg: '#15803D', href: 'https://wa.me/3173358492' },
   ];
 
   return (
