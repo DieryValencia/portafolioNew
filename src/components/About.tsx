@@ -44,8 +44,8 @@ export function About({ isDark, t, colors }: AboutProps) {
               <div
                 className="absolute rounded-full"
                 style={{
-                  width: '312px',
-                  height: '312px',
+                  width: 'min(440px, 85vw)',
+                  height: 'min(440px, 85vw)',
                   borderWidth: '2px',
                   borderStyle: 'dashed',
                   borderColor: isDark ? '#334155' : '#BFDBFE',
@@ -58,8 +58,8 @@ export function About({ isDark, t, colors }: AboutProps) {
               <div
                 className="absolute rounded-full"
                 style={{
-                  width: '296px',
-                  height: '296px',
+                  width: 'min(415px, 80vw)',
+                  height: 'min(415px, 80vw)',
                   background: `linear-gradient(${isDark ? '#1E293B' : '#FFFFFF'},${isDark ? '#1E293B' : '#FFFFFF'}) padding-box, linear-gradient(135deg,#2563EB,#F97316) border-box`,
                   border: '3px solid transparent',
                 }}
@@ -69,8 +69,8 @@ export function About({ isDark, t, colors }: AboutProps) {
               <div
                 className="relative rounded-full overflow-hidden flex-shrink-0"
                 style={{
-                  width: '272px',
-                  height: '272px',
+                  width: 'min(380px, 72vw)',
+                  height: 'min(380px, 72vw)',
                   boxShadow: isDark
                     ? '0 0 40px rgba(37,99,235,0.25), 0 20px 40px rgba(0,0,0,0.4)'
                     : '0 0 40px rgba(37,99,235,0.12), 0 20px 40px rgba(0,0,0,0.1)',
@@ -81,16 +81,16 @@ export function About({ isDark, t, colors }: AboutProps) {
                     src={PROFILE_PHOTO}
                     alt="Diery Valencia"
                     fill
-                    sizes="(max-width: 768px) 272px, 272px"
+                    sizes="(max-width: 768px) 72vw, 380px"
                     className="object-cover object-center"
                     priority
-                    quality={85}
+                    quality={90}
                     onError={() => setPhotoError(true)}
                   />
                 ) : (
                   <div className={`w-full h-full flex flex-col items-center justify-center gap-3 ${isDark ? 'bg-gray-800' : 'bg-gray-100'}`}>
-                    <User className={`w-16 h-16 ${isDark ? 'text-gray-600' : 'text-gray-300'}`} />
-                    <p className={`text-xs text-center px-4 leading-relaxed ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
+                    <User className={`w-20 h-20 ${isDark ? 'text-gray-600' : 'text-gray-300'}`} />
+                    <p className={`text-sm text-center px-4 leading-relaxed ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
                       Foto no disponible
                     </p>
                   </div>
@@ -99,7 +99,7 @@ export function About({ isDark, t, colors }: AboutProps) {
 
               {/* Badge Full Stack Dev */}
               <div
-                className="absolute -bottom-2 left-1/2 -translate-x-1/2 px-5 py-2 rounded-full text-xs font-bold text-white whitespace-nowrap shadow-lg"
+                className="absolute -bottom-4 left-1/2 -translate-x-1/2 px-6 py-2.5 rounded-full text-sm font-bold text-white whitespace-nowrap shadow-lg"
                 style={{
                   background: 'linear-gradient(135deg,#2563EB,#1D4ED8)',
                   boxShadow: '0 4px 16px rgba(37,99,235,0.4)',
