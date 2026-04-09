@@ -31,30 +31,24 @@ export function FloatingObjects({ isDark }: FloatingObjectsProps) {
 
   return (
     <div
+      className="grid w-full max-w-[500px] items-center justify-items-center gap-6 sm:gap-2 grid-cols-1 sm:grid-cols-[60px_1fr_60px] md:grid-cols-[70px_1fr_70px]"
       style={{
-        display: 'grid',
-        gridTemplateColumns: '70px 1fr 70px',
         gridTemplateRows: 'auto auto auto',
-        gap: '4px',
-        width: '100%',
-        maxWidth: '500px',
-        alignItems: 'center',
-        justifyItems: 'center',
       }}
     >
       {/* Fila 1 */}
-      <div style={{ animation: 'floatObj 3.5s ease-in-out infinite', display: 'flex', justifyContent: 'center' }}>
+      <div className="hidden sm:flex justify-center" style={{ animation: 'floatObj 3.5s ease-in-out infinite' }}>
         <ReactLogo isDark={isDark} />
       </div>
-      <div style={{ display: 'flex', justifyContent: 'center', animation: 'spin 9s linear infinite' }}>
+      <div className="flex justify-center" style={{ animation: 'spin 9s linear infinite' }}>
         <Star isDark={isDark} />
       </div>
-      <div style={{ animation: 'floatObj 4s ease-in-out infinite 0.8s', display: 'flex', justifyContent: 'center' }}>
+      <div className="hidden sm:flex justify-center" style={{ animation: 'floatObj 4s ease-in-out infinite 0.8s' }}>
         <Terminal isDark={isDark} />
       </div>
 
       {/* Fila 2 */}
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+      <div className="hidden sm:flex flex-col items-center gap-2">
         <div style={{ animation: 'floatObj 4.2s ease-in-out infinite 0.3s' }}>
           <GitBranch isDark={isDark} />
         </div>
@@ -62,11 +56,9 @@ export function FloatingObjects({ isDark }: FloatingObjectsProps) {
       </div>
 
       <div 
-        className="relative group flex items-center justify-center p-2"
+        className="relative group flex items-center justify-center p-0 sm:p-2 w-[65vw] sm:w-full min-w-[240px] max-w-[380px] shrink-0"
         style={{ 
           animation: 'heroFloat 4s ease-in-out infinite',
-          width: '100%',
-          maxWidth: '400px',
           aspectRatio: '1/1',
         }}
       >
@@ -100,7 +92,7 @@ export function FloatingObjects({ isDark }: FloatingObjectsProps) {
         </div>
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+      <div className="hidden sm:flex flex-col items-center gap-2">
         <div style={{ animation: 'floatObj 5s ease-in-out infinite 2s' }}>
           <DockerIcon isDark={isDark} />
         </div>
@@ -108,13 +100,13 @@ export function FloatingObjects({ isDark }: FloatingObjectsProps) {
       </div>
 
       {/* Fila 3 */}
-      <div style={{ animation: 'floatObj 4.5s ease-in-out infinite 1.2s', display: 'flex', justifyContent: 'center' }}>
+      <div className="hidden sm:flex justify-center" style={{ animation: 'floatObj 4.5s ease-in-out infinite 1.2s' }}>
         <TSBadge isDark={isDark} />
       </div>
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <div className="flex justify-center">
         <div style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#FB7185' }} />
       </div>
-      <div style={{ animation: 'floatObj 3.8s ease-in-out infinite 0.5s', display: 'flex', justifyContent: 'center' }}>
+      <div className="hidden sm:flex justify-center" style={{ animation: 'floatObj 3.8s ease-in-out infinite 0.5s' }}>
         <GraphQLBadge isDark={isDark} />
       </div>
     </div>

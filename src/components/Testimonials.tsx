@@ -4,6 +4,7 @@ import { Quote } from 'lucide-react';
 import { Translation } from '@/types';
 import { useSlider } from '@/hooks/useSlider';
 import { SliderButton, Dots } from './UIComponents';
+import { useState } from 'react';
 
 interface TestimonialsProps {
   isDark: boolean;
@@ -20,6 +21,31 @@ interface TestimonialsProps {
 
 export function Testimonials({ isDark, t, colors }: TestimonialsProps) {
   const test = useSlider(t.testimonials.items.length);
+
+  // Swipe logic optimizada (alta sensibilidad y rechazo vertical)
+  const [touchStartPos, setTouchStartPos] = useState<{ x: number; y: number } | null>(null);
+  const [touchEndPos, setTouchEndPos] = useState<{ x: number; y: number } | null>(null);
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEndPos(null);
+    setTouchStartPos({ x: e.targetTouches[0].clientX, y: e.targetTouches[0].clientY });
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEndPos({ x: e.targetTouches[0].clientX, y: e.targetTouches[0].clientY });
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStartPos || !touchEndPos) return;
+    const distanceX = touchStartPos.x - touchEndPos.x;
+    const distanceY = touchStartPos.y - touchEndPos.y;
+    
+    // Requiere un movimiento predominantemente horizontal y supera 35px
+    if (Math.abs(distanceX) > Math.abs(distanceY) && Math.abs(distanceX) > 35) {
+      if (distanceX > 0 && test.canNext) test.next();
+      if (distanceX < 0 && test.canPrev) test.prev();
+    }
+  };
 
   return (
     <section
@@ -64,7 +90,12 @@ export function Testimonials({ isDark, t, colors }: TestimonialsProps) {
         </div>
 
         {/* Carousel */}
-        <div className="overflow-hidden">
+        <div 
+          className="overflow-hidden touch-pan-y"
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+        >
           <div className="flex transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${test.index * 100}%)` }}>
             {t.testimonials.items.map((testimonial, i) => (
               <div key={i} className="min-w-full">
