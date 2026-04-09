@@ -27,6 +27,31 @@ export function Projects({ isDark, t, projectsData, colors }: ProjectsProps) {
   const [imgErrors, setImgErrors] = useState<Record<number, boolean>>({});
   const proj = useSlider(projectsData.length);
 
+  // Swipe logic optimizada (alta sensibilidad y rechazo vertical)
+  const [touchStartPos, setTouchStartPos] = useState<{ x: number; y: number } | null>(null);
+  const [touchEndPos, setTouchEndPos] = useState<{ x: number; y: number } | null>(null);
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEndPos(null);
+    setTouchStartPos({ x: e.targetTouches[0].clientX, y: e.targetTouches[0].clientY });
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEndPos({ x: e.targetTouches[0].clientX, y: e.targetTouches[0].clientY });
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStartPos || !touchEndPos) return;
+    const distanceX = touchStartPos.x - touchEndPos.x;
+    const distanceY = touchStartPos.y - touchEndPos.y;
+    
+    // Requiere un movimiento predominantemente horizontal y supera 35px
+    if (Math.abs(distanceX) > Math.abs(distanceY) && Math.abs(distanceX) > 35) {
+      if (distanceX > 0 && proj.canNext) proj.next();
+      if (distanceX < 0 && proj.canPrev) proj.prev();
+    }
+  };
+
   const handleImageError = (index: number) => {
     setImgErrors((prev) => ({ ...prev, [index]: true }));
   };
@@ -74,7 +99,12 @@ export function Projects({ isDark, t, projectsData, colors }: ProjectsProps) {
         </div>
 
         {/* Carousel */}
-        <div className="overflow-hidden rounded-2xl">
+        <div 
+          className="overflow-hidden rounded-2xl touch-pan-y"
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+        >
           <div className="flex transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${proj.index * 100}%)` }}>
             {projectsData.map((p, i) => {
               const project = t.projects.items[i];

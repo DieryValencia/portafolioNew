@@ -31,15 +31,9 @@ export function FloatingObjects({ isDark }: FloatingObjectsProps) {
 
   return (
     <div
+      className="grid w-full max-w-[500px] items-center justify-items-center gap-1 sm:gap-2 grid-cols-[40px_1fr_40px] sm:grid-cols-[60px_1fr_60px] md:grid-cols-[70px_1fr_70px]"
       style={{
-        display: 'grid',
-        gridTemplateColumns: '70px 1fr 70px',
         gridTemplateRows: 'auto auto auto',
-        gap: '4px',
-        width: '100%',
-        maxWidth: '500px',
-        alignItems: 'center',
-        justifyItems: 'center',
       }}
     >
       {/* Fila 1 */}
