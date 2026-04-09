@@ -46,63 +46,56 @@ export function Contact({ isDark, t, colors }: ContactProps) {
     message: '',
   });
 
-  // Inicializar EmailJS
+  const [touched, setTouched] = useState<Record<keyof FormState, boolean>>({
+    fullName: false, email: false, subject: false, message: false
+  });
+
+  const [formErrors, setFormErrors] = useState<Record<keyof FormState, string>>({
+    fullName: '', email: '', subject: '', message: ''
+  });
+
   useEffect(() => {
     if (isEmailJSConfigured()) {
       emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
     }
   }, []);
 
-  // Validar email
-  const isValidEmail = (email: string): boolean => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
+  const validateName = (name: string): string => {
+    if (!name) return 'El nombre es obligatorio';
+    if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+(?:\s+[a-zA-ZáéíóúÁÉÍÓÚñÑ]+)*$/.test(name)) return 'Solo letras. Sin números ni espacios iniciales/finales.';
+    return '';
   };
 
-  // Validar formulario
-  const validateForm = (): boolean => {
-    if (!formData.fullName.trim()) {
-      setFormStatus({
-        status: 'error',
-        message: 'El nombre completo es requerido',
-      });
-      return false;
-    }
-
-    if (!formData.email.trim()) {
-      setFormStatus({
-        status: 'error',
-        message: 'El email es requerido',
-      });
-      return false;
-    }
-
-    if (!isValidEmail(formData.email)) {
-      setFormStatus({
-        status: 'error',
-        message: 'Por favor ingresa un email válido',
-      });
-      return false;
-    }
-
-    if (!formData.subject.trim()) {
-      setFormStatus({
-        status: 'error',
-        message: 'El asunto es requerido',
-      });
-      return false;
-    }
-
-    if (!formData.message.trim()) {
-      setFormStatus({
-        status: 'error',
-        message: 'El mensaje no puede estar vacío',
-      });
-      return false;
-    }
-
-    return true;
+  const validateEmailStrict = (email: string): string => {
+    if (!email) return 'El email es obligatorio';
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return 'Ingresa un formato de email válido y sin espacios';
+    return '';
   };
+
+  const validateSubject = (subject: string): string => {
+    if (!subject) return 'El asunto es obligatorio';
+    if (/^\s/.test(subject)) return 'El asunto no puede iniciar con un espacio';
+    if (!/^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ¿?¡!.,][a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s¿?¡!.,-]*$/.test(subject)) return 'Formato inválido. Usa un texto limpio y profesional.';
+    return '';
+  };
+
+  const validateMessage = (msg: string): string => {
+    if (!msg) return 'El mensaje es obligatorio';
+    if (/^\s/.test(msg)) return 'El mensaje no puede iniciar con un espacio';
+    if (msg.trim().length < 10) return 'El mensaje debe tener al menos 10 caracteres válidos';
+    return '';
+  };
+
+  useEffect(() => {
+    setFormErrors({
+      fullName: validateName(formData.fullName),
+      email: validateEmailStrict(formData.email),
+      subject: validateSubject(formData.subject),
+      message: validateMessage(formData.message),
+    });
+  }, [formData]);
+
+  const isValid = !formErrors.fullName && !formErrors.email && !formErrors.subject && !formErrors.message && formData.fullName !== '' && formData.email !== '' && formData.subject !== '' && formData.message !== '';
 
   // Manejar envío del formulario
   const handleSubmit = async (e: React.FormEvent) => {
@@ -116,7 +109,9 @@ export function Contact({ isDark, t, colors }: ContactProps) {
       return;
     }
 
-    if (!validateForm()) {
+    setTouched({ fullName: true, email: true, subject: true, message: true });
+    
+    if (!isValid) {
       return;
     }
 
@@ -135,7 +130,8 @@ export function Contact({ isDark, t, colors }: ContactProps) {
           subject: formData.subject,
           message: formData.message,
           reply_to: formData.email,
-        }
+        },
+        EMAILJS_CONFIG.PUBLIC_KEY
       );
 
       setFormStatus({
@@ -143,13 +139,14 @@ export function Contact({ isDark, t, colors }: ContactProps) {
         message: '¡Mensaje enviado exitosamente! Te contactaré pronto.',
       });
 
-      // Limpiar formulario
+      // Limpiar formulario y toques
       setFormData({
         fullName: '',
         email: '',
         subject: '',
         message: '',
       });
+      setTouched({ fullName: false, email: false, subject: false, message: false });
 
       // Limpiar mensaje de éxito después de 5 segundos
       setTimeout(() => {
@@ -269,10 +266,15 @@ export function Contact({ isDark, t, colors }: ContactProps) {
                 { label: t.contact.form.fullName, type: 'text', ph: t.contact.form.placeholders.fullName, key: 'fullName' },
                 { label: t.contact.form.email, type: 'email', ph: t.contact.form.placeholders.email, key: 'email' },
                 { label: t.contact.form.subject, type: 'text', ph: t.contact.form.placeholders.subject, key: 'subject' },
-              ].map((f) => (
+              ].map((f) => {
+                const errorMsg = formErrors[f.key as keyof FormState];
+                const isTouched = touched[f.key as keyof FormState];
+                const hasError = isTouched && errorMsg !== '';
+                
+                return (
                 <div key={f.key}>
                   <label className="block text-sm font-semibold mb-2" style={{ color: isDark ? '#CBD5E1' : '#374151' }}>
-                    {f.label}
+                    {f.label} <span className="text-red-500 ml-0.5">*</span>
                   </label>
                   <input
                     type={f.type}
@@ -280,23 +282,26 @@ export function Contact({ isDark, t, colors }: ContactProps) {
                     className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all"
                     style={{
                       background: colors.bg,
-                      border: `1px solid ${colors.border}`,
+                      border: hasError ? '1px solid #ef4444' : `1px solid ${colors.border}`,
                       color: colors.text,
+                      boxShadow: hasError ? '0 0 0 1px rgba(239,68,68,0.2)' : 'none'
                     }}
                     value={formData[f.key as keyof typeof formData]}
                     onChange={(e) => setFormData({ ...formData, [f.key]: e.target.value })}
                     onFocus={(e) => {
-                      e.target.style.borderColor = '#2563EB';
+                      if (!hasError) e.target.style.borderColor = '#2563EB';
                     }}
                     onBlur={(e) => {
-                      e.target.style.borderColor = colors.border;
+                      setTouched({ ...touched, [f.key]: true });
+                      if (!hasError) e.target.style.borderColor = colors.border;
                     }}
                   />
+                  {hasError && <p className="text-xs text-red-500 mt-1.5 font-medium px-1 animate-pulse">{errorMsg}</p>}
                 </div>
-              ))}
+              )})}
               <div>
                 <label className="block text-sm font-semibold mb-2" style={{ color: isDark ? '#94A3B8' : '#374151' }}>
-                  {t.contact.form.message}
+                  {t.contact.form.message} <span className="text-red-500 ml-0.5">*</span>
                 </label>
                 <textarea
                   rows={4}
@@ -304,26 +309,29 @@ export function Contact({ isDark, t, colors }: ContactProps) {
                   className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all resize-none"
                   style={{
                     background: colors.bg,
-                    border: `1px solid ${colors.border}`,
+                    border: (touched.message && formErrors.message !== '') ? '1px solid #ef4444' : `1px solid ${colors.border}`,
                     color: colors.text,
+                    boxShadow: (touched.message && formErrors.message !== '') ? '0 0 0 1px rgba(239,68,68,0.2)' : 'none'
                   }}
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   onFocus={(e) => {
-                    e.target.style.borderColor = '#2563EB';
+                    if (!(touched.message && formErrors.message !== '')) e.target.style.borderColor = '#2563EB';
                   }}
                   onBlur={(e) => {
-                    e.target.style.borderColor = colors.border;
+                    setTouched({ ...touched, message: true });
+                    if (!(touched.message && formErrors.message !== '')) e.target.style.borderColor = colors.border;
                   }}
                 />
+                {(touched.message && formErrors.message !== '') && <p className="text-xs text-red-500 mt-1.5 font-medium px-1 animate-pulse">{formErrors.message}</p>}
               </div>
               <button
                 type="submit"
-                disabled={formStatus.status === 'loading'}
-                className="w-full py-3.5 rounded-xl text-sm font-bold text-white transition-all hover:opacity-90 hover:scale-[1.01] disabled:opacity-60 disabled:cursor-not-allowed disabled:scale-100"
+                disabled={formStatus.status === 'loading' || !isValid}
+                className="w-full py-3.5 rounded-xl text-sm font-bold text-white transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:scale-100"
                 style={{
-                  background: 'linear-gradient(135deg,#2563EB,#1D4ED8)',
-                  boxShadow: '0 4px 20px rgba(37,99,235,0.3)',
+                  background: (!isValid || formStatus.status === 'loading') ? (isDark ? '#334155' : '#94A3B8') : 'linear-gradient(135deg,#2563EB,#1D4ED8)',
+                  boxShadow: (!isValid || formStatus.status === 'loading') ? 'none' : '0 4px 20px rgba(37,99,235,0.3)',
                 }}
               >
                 {formStatus.status === 'loading' ? 'Enviando...' : t.contact.form.send}
