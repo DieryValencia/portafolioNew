@@ -1,13 +1,34 @@
 'use client';
 
 import Image from 'next/image';
-import { FOX_ILLUSTRATION } from '@/data/constants';
+import { useState, useEffect } from 'react';
 
 interface FloatingObjectsProps {
   isDark: boolean;
 }
 
+const AVATAR_CAP = 'https://ysannibzvvuwttkygtll.supabase.co/storage/v1/object/public/avatar01/avatargorra.webp';
+const AVATAR_NOCAP = 'https://ysannibzvvuwttkygtll.supabase.co/storage/v1/object/public/avatar01/avatar.webp';
+
 export function FloatingObjects({ isDark }: FloatingObjectsProps) {
+  const [avatarSrc, setAvatarSrc] = useState(AVATAR_CAP);
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  useEffect(() => {
+    try {
+      const lastAvatar = localStorage.getItem('lastAvatarFloating');
+      if (lastAvatar === 'cap') {
+        setAvatarSrc(AVATAR_NOCAP);
+        localStorage.setItem('lastAvatarFloating', 'nocap');
+      } else {
+        setAvatarSrc(AVATAR_CAP);
+        localStorage.setItem('lastAvatarFloating', 'cap');
+      }
+    } catch (e) {
+      // Ignore if localStorage unavailable
+    }
+  }, []);
+
   return (
     <div
       style={{
@@ -40,23 +61,43 @@ export function FloatingObjects({ isDark }: FloatingObjectsProps) {
         <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#A78BFA' }} />
       </div>
 
-      <div style={{ animation: 'heroFloat 4s ease-in-out infinite' }}>
-        <Image
-          src={FOX_ILLUSTRATION}
-          alt="Developer fox"
-          width={400}
-          height={400}
-          sizes="(max-width: 640px) 280px, (max-width: 1024px) 300px, 400px"
-          quality={85}
-          style={{
-            width: '100%',
-            height: 'auto',
-            display: 'block',
-            filter: 'drop-shadow(0 12px 32px rgba(249,115,22,0.22))',
+      <div 
+        className="relative group flex items-center justify-center p-2"
+        style={{ 
+          animation: 'heroFloat 4s ease-in-out infinite',
+          width: '100%',
+          maxWidth: '400px',
+          aspectRatio: '1/1',
+        }}
+      >
+        {/* Contenedor estricto del Avatar (Garantiza NUNCA verse rectangular) */}
+        <div 
+          className="relative w-full h-full rounded-full overflow-hidden transition-all duration-700"
+          style={{ 
+            boxShadow: isDark 
+              ? '0 16px 40px rgba(56, 189, 248, 0.15), inset 0 0 0 2px rgba(56, 189, 248, 0.3)' 
+              : '0 16px 40px rgba(37, 99, 235, 0.12), inset 0 0 0 2px rgba(37, 99, 235, 0.2)',
+            background: isDark ? 'radial-gradient(circle, rgba(30,41,59,0.9), rgba(15,23,42,1))' : 'radial-gradient(circle, rgba(255,255,255,1), rgba(241,245,249,0.9))',
           }}
-          priority
-          fetchPriority="high"
-        />
+        >
+          {/* Skeleton animado (mantiene la forma circular estricta desde el frame 0) */}
+          <div 
+            className={`absolute inset-0 z-10 pointer-events-none transition-opacity duration-700 ${imageLoaded ? 'opacity-0' : 'opacity-100'} ${isDark ? 'bg-slate-800' : 'bg-slate-200'} animate-pulse`} 
+          />
+          
+          <Image
+            key={avatarSrc}
+            src={avatarSrc}
+            alt="Developer Avatar"
+            fill
+            sizes="(max-width: 640px) 280px, (max-width: 1024px) 300px, 400px"
+            quality={90}
+            className={`object-cover object-center transition-all duration-1000 ${imageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-105'}`}
+            priority
+            fetchPriority="high"
+            onLoad={() => setImageLoaded(true)}
+          />
+        </div>
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>

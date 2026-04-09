@@ -92,6 +92,7 @@ export default function Home() {
                 bg2: colors.bg2,
                 muted: colors.muted,
                 border: colors.border,
+                text: colors.text,
               }}
             />
           </div>

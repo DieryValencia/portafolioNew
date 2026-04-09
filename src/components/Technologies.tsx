@@ -10,15 +10,16 @@ interface TechnologiesProps {
     bg2: string;
     muted: string;
     border: string;
+    text: string;
   };
 }
 
 export function Technologies({ isDark, technologies, colors }: TechnologiesProps) {
   return (
-    <div className="mt-20 overflow-hidden">
-      <h3 className="text-lg font-bold text-center mb-8" style={{ color: isDark ? '#F1F5F9' : '#0F172A' }}>
+    <div className="py-24 overflow-hidden">
+      <h2 className="text-3xl font-extrabold tracking-tight mb-12" style={{ color: colors.text }}>
         Stack
-      </h3>
+      </h2>
       <div className="relative">
         {/* SIDE FADE GRADIENTS */}
         <div
@@ -40,21 +41,21 @@ export function Technologies({ isDark, technologies, colors }: TechnologiesProps
 
         {/* INFINITE SCROLL CAROUSEL - Optimizado para móvil con GPU acceleration */}
         <div className="flex overflow-hidden">
-          <div className="animate-scroll-infinite py-4 flex gap-4">
+          <div className="animate-scroll-infinite py-8 flex gap-6">
             {[...technologies, ...technologies].map((tech, i) => {
               const Icon = tech.icon;
               return (
                 <div
                   key={i}
-                  className="flex-shrink-0 flex flex-col items-center gap-2 px-4 py-3 rounded-lg cursor-default transition-all duration-300"
+                  className="flex-shrink-0 flex flex-col items-center gap-3 px-6 py-5 rounded-2xl cursor-default transition-all duration-300 hover:shadow-lg"
                   style={{
                     background: colors.bg2,
                     border: `1px solid ${colors.border}`,
-                    minWidth: '100px',
+                    minWidth: '130px',
                   }}
                 >
-                  <Icon className="w-6 h-6" style={{ color: tech.color }} />
-                  <span className="text-xs font-semibold" style={{ color: colors.muted }}>
+                  <Icon className="w-8 h-8" style={{ color: tech.color }} />
+                  <span className="text-sm font-bold tracking-tight" style={{ color: colors.muted }}>
                     {tech.label}
                   </span>
                 </div>
