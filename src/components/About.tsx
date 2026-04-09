@@ -172,12 +172,10 @@ export function About({ isDark, t, colors }: AboutProps) {
                   </div>
 
                   {/* Texto jerarquizado e impactante */}
-                  <span className="font-bold tracking-tight text-sm md:text-[0.95rem] text-transparent bg-clip-text uppercase" 
+                  <span className="font-bold tracking-tight text-sm md:text-[0.95rem] uppercase" 
                         style={{ 
-                          backgroundImage: isDark 
-                            ? 'linear-gradient(to right, #E2E8F0, #94A3B8)' 
-                            : 'linear-gradient(to right, #0F172A, #334155)',
-                          filter: isDark ? 'drop-shadow(0 2px 2px rgba(0,0,0,0.05))' : 'none'
+                          color: isDark ? '#F8FAFC' : '#0F172A',
+                          textShadow: isDark ? '0 1px 2px rgba(0,0,0,0.2)' : 'none'
                         }}>
                     {t.about.badge}
                   </span>
@@ -202,8 +200,8 @@ export function About({ isDark, t, colors }: AboutProps) {
                     key={i}
                     className="leading-relaxed"
                     style={{
-                      color: colors.muted,
-                      fontSize: '0.93rem',
+                      color: isDark ? '#CBD5E1' : '#334151',
+                      fontSize: '0.95rem',
                       lineHeight: 1.85,
                     }}
                   >
@@ -219,9 +217,9 @@ export function About({ isDark, t, colors }: AboutProps) {
                     key={trait}
                     className="px-3 py-1.5 rounded-md text-[0.75rem] uppercase tracking-wider font-semibold transition-all hover:-translate-y-0.5"
                     style={{
-                      background: isDark ? 'rgba(30, 41, 59, 0.6)' : 'rgba(241, 245, 249, 0.8)',
-                      color: isDark ? '#94A3B8' : '#64748B',
-                      border: `1px solid ${isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.05)'}`,
+                      background: isDark ? 'rgba(15, 23, 42, 0.8)' : '#F1F5F9',
+                      color: isDark ? '#F1F5F9' : '#1E293B',
+                      border: `1px solid ${isDark ? 'rgba(56, 189, 248, 0.25)' : 'rgba(37, 99, 235, 0.25)'}`,
                     }}
                   >
                     {trait}
