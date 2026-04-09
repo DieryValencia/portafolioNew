@@ -88,23 +88,62 @@ export function Projects({ isDark, t, projectsData, colors }: ProjectsProps) {
                       boxShadow: isDark ? '0 4px 24px rgba(0,0,0,0.3)' : '0 4px 24px rgba(0,0,0,0.06)',
                     }}
                   >
-                    {/* Imagen o placeholder */}
-                    <div className={`md:w-2/5 h-56 md:h-auto flex-shrink-0 overflow-hidden bg-gradient-to-br ${p.color} relative`}>
-                      {!imgErrors[i] ? (
-                        <Image
-                          src={project.image}
-                          alt={project.title}
-                          fill
-                          sizes="(max-width: 768px) 100vw, 500px"
-                          className="object-cover"
-                          quality={75}
-                          onError={() => handleImageError(i)}
-                        />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center">
-                          <FaGithub className="w-20 h-20 text-white opacity-20" />
+                    {/* Contenedor de Imagen Premium tipo SaaS */}
+                    <div 
+                      className="relative md:w-[42%] h-64 md:h-auto flex-shrink-0 flex flex-col p-5 md:p-7"
+                      style={{ 
+                        background: isDark ? 'radial-gradient(circle at top right, rgba(30,41,59,0.4), rgba(15,23,42,0.6))' : 'radial-gradient(circle at top right, rgba(248,250,252,0.9), rgba(241,245,249,0.5))',
+                        borderRight: `1px solid ${colors.border}` 
+                      }}
+                    >
+                      {/* Decoración 1: Grid Pattern de fondo sutil */}
+                      <div 
+                        className="absolute inset-0 pointer-events-none opacity-[0.15] dark:opacity-[0.03]" 
+                        style={{ 
+                          backgroundImage: 'radial-gradient(circle at 1.5px 1.5px, currentColor 1px, transparent 0)', 
+                          backgroundSize: '16px 16px', 
+                          color: isDark ? '#ffffff' : '#000000' 
+                        }} 
+                      />
+
+                      {/* Decoración 2: Acento tecnológico lateral (Línea de datos) */}
+                      <div className="absolute left-2 md:left-3 top-1/4 bottom-1/4 w-px bg-gradient-to-b from-transparent via-blue-500/20 dark:via-blue-400/20 to-transparent pointer-events-none hidden md:block" />
+                      <div className="absolute left-[7px] md:left-[11px] top-1/3 w-1.5 h-1.5 rounded-full bg-blue-500/40 shadow-[0_0_8px_rgba(59,130,246,0.6)] animate-pulse hidden md:block" />
+                      <div className="absolute left-[7px] md:left-[11px] bottom-1/3 w-1.5 h-1.5 rounded-full bg-blue-500/20 hidden md:block" />
+
+                      {/* Floating Card (Marco de la imagen en sí) */}
+                      <div className="relative w-full flex-1 min-h-[160px] rounded-2xl group perspective-1000 z-10 transition-transform duration-500">
+                        {/* Glow subyacente que se ilumina al hacer hover */}
+                        <div className="absolute -inset-1.5 bg-gradient-to-br from-blue-500/15 to-purple-500/15 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-3xl" />
+                        
+                        {/* Marco Elevable */}
+                        <div 
+                          className="relative w-full h-full rounded-xl overflow-hidden border transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:-translate-y-1.5"
+                          style={{
+                            borderColor: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)',
+                            boxShadow: isDark ? '0 10px 30px -10px rgba(0,0,0,0.6)' : '0 12px 30px -10px rgba(0,0,0,0.15)',
+                          }}
+                        >
+                          {!imgErrors[i] ? (
+                            <Image
+                              src={project.image}
+                              alt={project.title}
+                              fill
+                              sizes="(max-width: 768px) 100vw, 500px"
+                              className="object-cover transition-transform duration-700 ease-out group-hover:scale-110 group-hover:opacity-95"
+                              quality={90}
+                              onError={() => handleImageError(i)}
+                            />
+                          ) : (
+                            <div className={`w-full h-full flex items-center justify-center bg-gradient-to-br ${p.color}`}>
+                              <FaGithub className="w-16 h-16 text-white/30" />
+                            </div>
+                          )}
+                          
+                          {/* Superposición sutil tipo Glass en el borde inferior */}
+                          <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-black/20 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                         </div>
-                      )}
+                      </div>
                     </div>
 
                     {/* Contenido */}

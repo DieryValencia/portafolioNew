@@ -1,13 +1,34 @@
 'use client';
 
 import Image from 'next/image';
-import { FOX_ILLUSTRATION } from '@/data/constants';
+import { useState, useEffect } from 'react';
 
 interface FloatingObjectsProps {
   isDark: boolean;
 }
 
+const AVATAR_CAP = 'https://ysannibzvvuwttkygtll.supabase.co/storage/v1/object/public/avatar01/avatargorra.webp';
+const AVATAR_NOCAP = 'https://ysannibzvvuwttkygtll.supabase.co/storage/v1/object/public/avatar01/avatar.webp';
+
 export function FloatingObjects({ isDark }: FloatingObjectsProps) {
+  const [avatarSrc, setAvatarSrc] = useState(AVATAR_CAP);
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  useEffect(() => {
+    try {
+      const lastAvatar = localStorage.getItem('lastAvatarFloating');
+      if (lastAvatar === 'cap') {
+        setAvatarSrc(AVATAR_NOCAP);
+        localStorage.setItem('lastAvatarFloating', 'nocap');
+      } else {
+        setAvatarSrc(AVATAR_CAP);
+        localStorage.setItem('lastAvatarFloating', 'cap');
+      }
+    } catch (e) {
+      // Ignore if localStorage unavailable
+    }
+  }, []);
+
   return (
     <div
       style={{
@@ -40,22 +61,29 @@ export function FloatingObjects({ isDark }: FloatingObjectsProps) {
         <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#A78BFA' }} />
       </div>
 
-      <div style={{ animation: 'heroFloat 4s ease-in-out infinite' }}>
+      <div style={{ animation: 'heroFloat 4s ease-in-out infinite', position: 'relative' }}>
+        <div 
+          className={`absolute inset-0 pointer-events-none transition-opacity duration-700 rounded-full ${imageLoaded ? 'opacity-0' : 'opacity-100'} ${isDark ? 'bg-slate-800' : 'bg-slate-200'} animate-pulse`} 
+          style={{ width: '100%', height: '100%' }}
+        />
         <Image
-          src={FOX_ILLUSTRATION}
-          alt="Developer fox"
+          key={avatarSrc}
+          src={avatarSrc}
+          alt="Developer Avatar"
           width={400}
           height={400}
           sizes="(max-width: 640px) 280px, (max-width: 1024px) 300px, 400px"
           quality={85}
+          className={`transition-opacity duration-1000 object-contain ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
           style={{
             width: '100%',
             height: 'auto',
             display: 'block',
-            filter: 'drop-shadow(0 12px 32px rgba(249,115,22,0.22))',
+            filter: isDark ? 'drop-shadow(0 12px 32px rgba(56,189,248,0.15))' : 'drop-shadow(0 12px 32px rgba(37,99,235,0.12))',
           }}
           priority
           fetchPriority="high"
+          onLoad={() => setImageLoaded(true)}
         />
       </div>
 

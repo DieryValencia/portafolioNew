@@ -7,6 +7,10 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'i.imgur.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'ysannibzvvuwttkygtll.supabase.co',
+      },
     ],
     formats: ['image/avif', 'image/webp'],
   },
