@@ -42,15 +42,16 @@ export function Education({ isDark, t, colors }: EducationProps) {
               <div key={i} className="flex gap-5">
                 <div className="flex flex-col items-center flex-shrink-0 w-4">
                   <div
-                    className="w-3 h-3 rounded-full mt-1.5 flex-shrink-0"
+                    className="w-3 h-3 rounded-full mt-1.5 flex-shrink-0 relative z-10"
                     style={{
                       background: colors.blue,
                       border: `2px solid ${isDark ? '#BFDBFE' : colors.border}`,
+                      boxShadow: isDark ? '0 0 12px rgba(96, 165, 250, 0.4)' : 'none'
                     }}
                   />
-                  {i < t.education.studies.length - 1 && <div className="w-px flex-1 my-2" style={{ background: colors.border }} />}
+                  {i < t.education.studies.length - 1 && <div className="w-px flex-1 my-3" style={{ background: colors.border }} />}
                 </div>
-                <div className={i < t.education.studies.length - 1 ? 'pb-8' : 'pb-0'}>
+                <div className={i < t.education.studies.length - 1 ? 'pb-12' : 'pb-0'}>
                   <span
                     className="inline-block px-2.5 py-1 rounded-full text-xs font-bold mb-2"
                     style={{
@@ -60,13 +61,19 @@ export function Education({ isDark, t, colors }: EducationProps) {
                   >
                     {e.period}
                   </span>
-                  <h4 className="text-sm font-bold mb-0.5" style={{ color: colors.text }}>
+                  <h4 className="text-sm font-bold mb-1" style={{ color: colors.text }}>
                     {e.title}
                   </h4>
-                  <p className="text-sm italic mb-1" style={{ color: isDark ? '#64748B' : '#94A3B8' }}>
+                  <p className="text-sm italic mb-2.5" style={{ color: isDark ? '#94A3B8' : '#475569' }}>
                     {e.institution}
                   </p>
-                  <p className="text-sm leading-relaxed" style={{ color: colors.muted }}>
+                  <p 
+                    className="text-sm leading-relaxed pl-4 border-l-2" 
+                    style={{ 
+                      color: isDark ? '#CBD5E1' : '#334151',
+                      borderLeftColor: isDark ? 'rgba(96, 165, 250, 0.3)' : 'rgba(37, 99, 235, 0.2)' 
+                    }}
+                  >
                     {e.desc}
                   </p>
                 </div>
@@ -84,15 +91,16 @@ export function Education({ isDark, t, colors }: EducationProps) {
               <div key={i} className="flex gap-5">
                 <div className="flex flex-col items-center flex-shrink-0 w-4">
                   <div
-                    className="w-3 h-3 rounded-full mt-1.5 flex-shrink-0"
+                    className="w-3 h-3 rounded-full mt-1.5 flex-shrink-0 relative z-10"
                     style={{
                       background: colors.accent,
                       border: `2px solid ${isDark ? '#FDBA74' : '#FED7AA'}`,
+                      boxShadow: isDark ? '0 0 12px rgba(251, 146, 60, 0.4)' : 'none'
                     }}
                   />
-                  {i < t.education.experience.length - 1 && <div className="w-px flex-1 my-2" style={{ background: colors.border }} />}
+                  {i < t.education.experience.length - 1 && <div className="w-px flex-1 my-3" style={{ background: colors.border }} />}
                 </div>
-                <div className={i < t.education.experience.length - 1 ? 'pb-8' : 'pb-0'}>
+                <div className={i < t.education.experience.length - 1 ? 'pb-12' : 'pb-0'}>
                   <span
                     className="inline-block px-2.5 py-1 rounded-full text-xs font-bold mb-2"
                     style={{
@@ -102,13 +110,19 @@ export function Education({ isDark, t, colors }: EducationProps) {
                   >
                     {e.period}
                   </span>
-                  <h4 className="text-sm font-bold mb-0.5" style={{ color: colors.text }}>
+                  <h4 className="text-sm font-bold mb-1" style={{ color: colors.text }}>
                     {e.title}
                   </h4>
-                  <p className="text-sm italic mb-1" style={{ color: isDark ? '#64748B' : '#94A3B8' }}>
+                  <p className="text-sm italic mb-2.5" style={{ color: isDark ? '#94A3B8' : '#475569' }}>
                     {e.company}
                   </p>
-                  <p className="text-sm leading-relaxed" style={{ color: colors.muted }}>
+                  <p 
+                    className="text-sm leading-relaxed pl-4 border-l-2" 
+                    style={{ 
+                      color: isDark ? '#CBD5E1' : '#334151',
+                      borderLeftColor: isDark ? 'rgba(251, 146, 60, 0.3)' : 'rgba(249, 115, 22, 0.2)' 
+                    }}
+                  >
                     {e.desc}
                   </p>
                 </div>
