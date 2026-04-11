@@ -64,13 +64,13 @@ export function Education({ isDark, t, colors }: EducationProps) {
                   <h4 className="text-sm font-bold mb-1" style={{ color: colors.text }}>
                     {e.title}
                   </h4>
-                  <p className="text-sm italic mb-2.5" style={{ color: isDark ? '#94A3B8' : '#475569' }}>
+                  <p className="text-sm italic mb-2.5" style={{ color: isDark ? '#94A3B8' : colors.muted }}>
                     {e.institution}
                   </p>
                   <p 
                     className="text-sm leading-relaxed pl-4 border-l-2" 
                     style={{ 
-                      color: isDark ? '#CBD5E1' : '#334151',
+                      color: isDark ? '#CBD5E1' : colors.muted,
                       borderLeftColor: isDark ? 'rgba(96, 165, 250, 0.3)' : 'rgba(37, 99, 235, 0.2)' 
                     }}
                   >
@@ -113,13 +113,13 @@ export function Education({ isDark, t, colors }: EducationProps) {
                   <h4 className="text-sm font-bold mb-1" style={{ color: colors.text }}>
                     {e.title}
                   </h4>
-                  <p className="text-sm italic mb-2.5" style={{ color: isDark ? '#94A3B8' : '#475569' }}>
+                  <p className="text-sm italic mb-2.5" style={{ color: isDark ? '#94A3B8' : colors.muted }}>
                     {e.company}
                   </p>
                   <p 
                     className="text-sm leading-relaxed pl-4 border-l-2" 
                     style={{ 
-                      color: isDark ? '#CBD5E1' : '#334151',
+                      color: isDark ? '#CBD5E1' : colors.muted,
                       borderLeftColor: isDark ? 'rgba(251, 146, 60, 0.3)' : 'rgba(249, 115, 22, 0.2)' 
                     }}
                   >

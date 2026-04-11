@@ -159,9 +159,9 @@ export function Projects({ isDark, t, projectsData, colors }: ProjectsProps) {
                               src={project.image}
                               alt={project.title}
                               fill
-                              sizes="(max-width: 768px) 100vw, 500px"
+                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 42vw, 500px"
                               className="object-cover transition-transform duration-700 ease-out group-hover:scale-110 group-hover:opacity-95"
-                              quality={90}
+                              quality={80}
                               onError={() => handleImageError(i)}
                             />
                           ) : (
@@ -193,7 +193,7 @@ export function Projects({ isDark, t, projectsData, colors }: ProjectsProps) {
                             className="px-2.5 py-1 rounded-full text-xs font-semibold"
                             style={{
                               background: isDark ? '#0F172A' : '#F1F5F9',
-                              color: isDark ? '#94A3B8' : '#475569',
+                              color: isDark ? '#94A3B8' : '#334155',
                               border: `1px solid ${colors.border}`,
                             }}
                           >
