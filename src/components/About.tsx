@@ -123,8 +123,8 @@ export function About({ isDark, t, colors }: AboutProps) {
                     fill
                     sizes="(max-width: 768px) 80vw, 400px"
                     className="object-cover object-center scale-105"
-                    priority
-                    quality={95}
+                    loading="lazy"
+                    quality={80}
                     onError={() => setPhotoError(true)}
                   />
                 ) : (

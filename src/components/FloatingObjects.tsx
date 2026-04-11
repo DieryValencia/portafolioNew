@@ -82,8 +82,8 @@ export function FloatingObjects({ isDark }: FloatingObjectsProps) {
             src={avatarSrc}
             alt="Developer Avatar"
             fill
-            sizes="(max-width: 640px) 280px, (max-width: 1024px) 300px, 400px"
-            quality={90}
+            sizes="(max-width: 640px) 65vw, 380px"
+            quality={85}
             className={`object-cover object-center transition-all duration-1000 ${imageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-105'}`}
             priority
             fetchPriority="high"

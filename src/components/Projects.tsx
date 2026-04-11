@@ -159,9 +159,9 @@ export function Projects({ isDark, t, projectsData, colors }: ProjectsProps) {
                               src={project.image}
                               alt={project.title}
                               fill
-                              sizes="(max-width: 768px) 100vw, 500px"
+                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 42vw, 500px"
                               className="object-cover transition-transform duration-700 ease-out group-hover:scale-110 group-hover:opacity-95"
-                              quality={90}
+                              quality={80}
                               onError={() => handleImageError(i)}
                             />
                           ) : (
