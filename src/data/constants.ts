@@ -20,7 +20,7 @@ export const COLORS = {
     blue: '#2563EB',
     accent: '#F97316',
     text: '#0F172A',
-    muted: '#475569',
+    muted: '#334155',
     border: '#E2E8F0',
   },
   dark: {

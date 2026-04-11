@@ -200,7 +200,7 @@ export function About({ isDark, t, colors }: AboutProps) {
                     key={i}
                     className="leading-relaxed"
                     style={{
-                      color: isDark ? '#CBD5E1' : '#334151',
+                      color: isDark ? '#CBD5E1' : colors.muted,
                       fontSize: '0.95rem',
                       lineHeight: 1.85,
                     }}
@@ -217,8 +217,8 @@ export function About({ isDark, t, colors }: AboutProps) {
                     key={trait}
                     className="px-3 py-1.5 rounded-md text-[0.75rem] uppercase tracking-wider font-semibold transition-all hover:-translate-y-0.5"
                     style={{
-                      background: isDark ? 'rgba(15, 23, 42, 0.8)' : '#F1F5F9',
-                      color: isDark ? '#F1F5F9' : '#1E293B',
+                      background: isDark ? 'rgba(15, 23, 42, 0.8)' : '#E2E8F0',
+                      color: isDark ? '#F1F5F9' : '#0F172A',
                       border: `1px solid ${isDark ? 'rgba(56, 189, 248, 0.25)' : 'rgba(37, 99, 235, 0.25)'}`,
                     }}
                   >

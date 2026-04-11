@@ -89,7 +89,7 @@ export function Hero({ isDark, t, colors }: HeroProps) {
               className="font-light mb-4"
               style={{
                 fontSize: 'clamp(1rem, 2vw, 1.15rem)',
-                color: isDark ? '#60A5FA' : '#2563EB',
+                color: isDark ? '#60A5FA' : '#1D4ED8',
                 letterSpacing: '0.02em',
               }}
             >

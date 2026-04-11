@@ -193,7 +193,7 @@ export function Projects({ isDark, t, projectsData, colors }: ProjectsProps) {
                             className="px-2.5 py-1 rounded-full text-xs font-semibold"
                             style={{
                               background: isDark ? '#0F172A' : '#F1F5F9',
-                              color: isDark ? '#94A3B8' : '#475569',
+                              color: isDark ? '#94A3B8' : '#334155',
                               border: `1px solid ${colors.border}`,
                             }}
                           >
