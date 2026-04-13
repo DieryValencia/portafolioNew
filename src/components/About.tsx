@@ -137,7 +137,7 @@ export function About({ isDark, t, colors }: AboutProps) {
                 )}
               </div>
 
-              {/* Tarjeta Full Stack Dev Orgánica y Elegante */}
+              {/* Tarjeta Full Stack Orgánica y Elegante */}
               <div 
                 className="absolute -bottom-4 md:-bottom-2 left-1/2 md:left-auto md:right-[-2rem] -translate-x-1/2 md:-translate-x-0 z-30 transition-all duration-700 hover:scale-105"
               >
