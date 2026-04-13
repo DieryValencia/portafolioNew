@@ -24,7 +24,7 @@ export const translations: Record<'es' | 'en', Translation> = {
       p2: 'Durante mi formación he fortalecido competencias en desarrollo web, integración de APIs y gestión de bases de datos, trabajando bajo principios de calidad, buenas prácticas y trabajo colaborativo. Me caracterizo por mi compromiso, atención al detalle y enfoque en entregar soluciones sólidas, bien estructuradas y orientadas a resultados.',
       p3: '',
       traits: ['Trabajo en equipo', 'Aprendizaje continuo', 'Atención al detalle', 'Código limpio', 'Responsable'],
-      badge: 'Full Stack Dev',
+      badge: 'Full Stack',
     },
     projects: {
       title: 'Mis Proyectos',
@@ -173,7 +173,7 @@ export const translations: Record<'es' | 'en', Translation> = {
       p2: 'Throughout my education I have strengthened skills in web development, API integration and database management, working under principles of quality, best practices and collaborative work. I\'m committed, detail-oriented and focused on delivering solid, well-structured, results-driven solutions.',
       p3: '',
       traits: ['Teamwork', 'Continuous learning', 'Attention to detail', 'Clean code', 'Responsible'],
-      badge: 'Full Stack Dev',
+      badge: 'Full Stack',
     },
     projects: {
       title: 'My Projects',
