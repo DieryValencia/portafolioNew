@@ -2,13 +2,14 @@
 
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
+import { AVATAR_PHOTO, AVATAR_GORRA_PHOTO } from '../data/constants';
 
 interface FloatingObjectsProps {
   isDark: boolean;
 }
 
-const AVATAR_CAP = 'https://ysannibzvvuwttkygtll.supabase.co/storage/v1/object/public/avatar01/avatargorra.webp';
-const AVATAR_NOCAP = 'https://ysannibzvvuwttkygtll.supabase.co/storage/v1/object/public/avatar01/avatar.webp';
+const AVATAR_CAP = AVATAR_GORRA_PHOTO;
+const AVATAR_NOCAP = AVATAR_PHOTO;
 
 export function FloatingObjects({ isDark }: FloatingObjectsProps) {
   const [avatarSrc, setAvatarSrc] = useState(AVATAR_CAP);
