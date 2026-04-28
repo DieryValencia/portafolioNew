@@ -1,5 +1,6 @@
 export const PROFILE_PHOTO = 'https://i.imgur.com/F1Wb0V6.jpg';
-export const FOX_ILLUSTRATION = 'https://i.imgur.com/v2HCHPp.png';
+export const AVATAR_PHOTO = 'https://imgur.com/rQezJdY';
+export const AVATAR_GORRA_PHOTO = 'https://imgur.com/zJRrzpH';
 
 export const SOCIAL_LINKS = {
   whatsapp: 'https://wa.me/3173358492',
