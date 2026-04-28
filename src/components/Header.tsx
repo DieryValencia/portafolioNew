@@ -5,6 +5,7 @@ import { Globe, Menu, Moon, Sun, X } from 'lucide-react';
 import { FaWhatsapp } from 'react-icons/fa';
 import { Translation } from '@/types';
 import { useState, useRef, useEffect } from 'react';
+import ReactCountryFlag from 'react-country-flag';
 
 // Altura del header fijo (h-16 = 64px)
 const HEADER_HEIGHT = 64;
@@ -43,11 +44,11 @@ export function Header({ isDark, language, t, onThemeToggle, onLanguageToggle, c
   const headerRef = useRef<HTMLDivElement>(null);
 
   const navLinks = [
-    { label: t.nav.about,         href: '#about' },
-    { label: t.nav.projects,      href: '#proyectos' },
-    { label: t.nav.education,     href: '#estudios' },
-    { label: t.nav.Testimonials,  href: '#testimonios' },
-    { label: t.nav.contact,       href: '#contacto' },
+    { label: t.nav.about, href: '#about' },
+    { label: t.nav.projects, href: '#proyectos' },
+    { label: t.nav.education, href: '#estudios' },
+    { label: t.nav.Testimonials, href: '#testimonios' },
+    { label: t.nav.contact, href: '#contacto' },
   ];
 
   // Cerrar menú al hacer click fuera
@@ -83,8 +84,8 @@ export function Header({ isDark, language, t, onThemeToggle, onLanguageToggle, c
         <header
           className="fixed top-0 left-0 right-0 z-50 border-b"
           style={{
-            background: isDark 
-              ? 'rgba(15, 23, 42, 0.95)' 
+            background: isDark
+              ? 'rgba(15, 23, 42, 0.95)'
               : 'rgba(248, 250, 252, 0.95)',
             borderBottomColor: colors.border,
             backdropFilter: 'blur(8px)',
@@ -102,19 +103,25 @@ export function Header({ isDark, language, t, onThemeToggle, onLanguageToggle, c
               style={{ color: isDark ? '#F1F5F9' : '#0F172A' }}
               aria-label="Diery Valencia - Ir al inicio"
             >
-              Diery<span style={{ color: isDark ? '#F1F5F9' : '#0F172A' }}> Valencia</span>
+              Diery<span style={{ color: isDark ? '#FB923C' : '#ea580c' }}> Valencia</span>
             </a>
 
             {/* Right Side Controls - Always visible */}
             <div className="flex items-center gap-3">
               <button
                 onClick={onLanguageToggle}
-                className="w-9 h-9 flex items-center justify-center rounded-lg transition-colors hover:bg-blue-50 dark:hover:bg-blue-950/30"
+                className="h-9 w-auto px-2 flex items-center justify-center gap-1.5 rounded-lg transition-colors hover:bg-blue-50 dark:hover:bg-blue-950/30"
                 style={{ color: colors.muted }}
-                title={language === 'es' ? 'English' : 'Español'}
+                title={language === 'es' ? 'Switch to English' : 'Cambiar a Español'}
                 aria-label="Toggle language"
               >
-                <Globe className="w-5 h-5" />
+                <ReactCountryFlag
+                  countryCode={language === 'es' ? 'ES' : 'US'}
+                  svg
+                  style={{ width: '1.2em', height: '1.2em', borderRadius: '2px' }}
+                  title={language === 'es' ? 'Español' : 'English'}
+                />
+                <span className="text-xs font-bold">{language.toUpperCase()}</span>
               </button>
               <button
                 onClick={onThemeToggle}
@@ -158,8 +165,8 @@ export function Header({ isDark, language, t, onThemeToggle, onLanguageToggle, c
             id="nav-menu"
             className="fixed top-16 left-0 right-0 z-40 border-t transition-all duration-300 ease-out"
             style={{
-              background: isDark 
-                ? 'rgba(15, 23, 42, 0.98)' 
+              background: isDark
+                ? 'rgba(15, 23, 42, 0.98)'
                 : 'rgba(248, 250, 252, 0.98)',
               borderTopColor: colors.border,
               backdropFilter: 'blur(10px)',
