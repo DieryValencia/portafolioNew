@@ -141,7 +141,7 @@ export const translations: Record<'es' | 'en', Translation> = {
       socialTitle: 'Sígueme',
       location: 'Pasto, Nariño · Colombia',
       copyright: '© 2026 Diery Valencia. Todos los derechos reservados.',
-      university: 'Universidad Cooperativa de Colombia — Ingeniería de Software',
+      university: 'Ingeniería de Software',
       available: 'Disponible para proyectos',
     },
   },
