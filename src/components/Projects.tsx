@@ -1,7 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import { ExternalLink } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';
 import { Translation, Project } from '@/types';
 import { useSlider } from '@/hooks/useSlider';
@@ -203,7 +202,7 @@ export function Projects({ isDark, t, projectsData, colors }: ProjectsProps) {
                       </div>
 
                       {/* Botones */}
-                      <div className="flex gap-3 pt-1">
+                      <div className="flex flex-wrap gap-3 pt-1">
                         <a
                           href={p.github}
                           target="_blank"
@@ -214,16 +213,29 @@ export function Projects({ isDark, t, projectsData, colors }: ProjectsProps) {
                         >
                           <FaGithub className="w-4 h-4" /> GitHub
                         </a>
-                        <a
-                          href={p.demo}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all hover:opacity-90"
-                          style={{ border: `2px solid ${colors.blue}`, color: colors.blue }}
-                          aria-label={`Demo - ${project.title}`}
-                        >
-                          <ExternalLink className="w-4 h-4" /> Demo
-                        </a>
+                        {i === 0 ? (
+                          <div
+                            className="px-4 py-2.5 rounded-xl text-sm font-medium"
+                            style={{
+                              border: `1px solid ${colors.border}`,
+                              color: colors.muted,
+                              background: isDark ? 'rgba(15, 23, 42, 0.55)' : 'rgba(248, 250, 252, 0.95)',
+                            }}
+                          >
+                            Actualmente no está desplegado en la nube por restricciones de costos de infraestructura y mantenimiento.
+                          </div>
+                        ) : p.demo ? (
+                          <a
+                            href={p.demo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all hover:opacity-90"
+                            style={{ border: `2px solid ${colors.blue}`, color: colors.blue }}
+                            aria-label={`Demo - ${project.title}`}
+                          >
+                            Ver demo
+                          </a>
+                        ) : null}
                       </div>
                     </div>
                   </div>

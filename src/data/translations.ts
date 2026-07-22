@@ -30,6 +30,11 @@ export const translations: Record<'es' | 'en', Translation> = {
       title: 'Mis Proyectos',
       items: [
         {
+          title: 'Plataforma de Mantenimiento Predictivo Interactivo',
+          desc: 'Plataforma IoT para monitorear activos industriales en tiempo real, detectar fallas tempranas y enviar alertas críticas al operador. Desde la aplicación era posible interactuar directamente con el sistema, activar respuestas de control y recibir notificaciones al celular del operador con botones para tomar decisiones.',
+          image: 'https://i.imgur.com/MEJRDXWh.jpg',
+        },
+        {
           title: 'Lista de Reproducción Música',
           desc: 'Aplicación web de lista de reproducción de canciones implementada con listas doblemente enlazadas en TypeScript.',
           image: 'https://i.imgur.com/wvkjdsf.jpg',
@@ -172,6 +177,11 @@ export const translations: Record<'es' | 'en', Translation> = {
     projects: {
       title: 'My Projects',
       items: [
+        {
+          title: 'Interactive Predictive Maintenance Platform',
+          desc: 'IoT platform for monitoring industrial assets in real time, detecting early failures, and sending critical alerts to the operator. From the application, it was possible to interact directly with the system, trigger control responses, and receive mobile notifications with decision buttons for incident management.',
+          image: 'https://i.imgur.com/MEJRDXWh.jpg',
+        },
         {
           title: 'Music Playlist',
           desc: 'Web application for song playlists implemented with doubly linked lists in TypeScript.',

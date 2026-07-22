@@ -2,6 +2,12 @@ import { Project } from '@/types';
 
 export const projectsData: Project[] = [
   {
+    tags: ['Node.js', 'Apache Kafka', 'RabbitMQ', 'Docker', 'WebSocket', 'Microservicios', 'IoT', 'Notificaciones'],
+    color: 'from-emerald-600 to-teal-700',
+    github: 'https://github.com/DieryValencia/Plataforma-de-Mantenimiento-Predictivo-Interactivo',
+    demo: '',
+  },
+  {
     tags: ['Node.js', 'Express', 'TypeScript', 'Axios', 'React', 'Vite'],
     color: 'from-blue-600 to-indigo-700',
     github: 'https://github.com/DieryValencia/Music',
